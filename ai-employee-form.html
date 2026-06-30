@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ตั้งค่าพนักงาน AI ประจำฝ่าย</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&family=Prompt:wght@400;500;600;700;800;900&display=swap");
+
+    :root {
+      --ink: #17121f;
+      --muted: #645b74;
+      --purple: #2b0877;
+      --violet: #7c3aed;
+      --magenta: #c026d3;
+      --soft: #fbf8ff;
+      --line: #ddd4ec;
+      --blue: #eaf3ff;
+      --green: #eaf9ef;
+      --yellow: #fff4ca;
+      --red: #fff0f0;
+      --panel: #ffffff;
+      --shadow: 0 18px 48px rgba(43, 8, 119, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fbf8ff 0%, #f4ecff 52%, #ffffff 100%);
+      font-family: "Prompt", "Kanit", "Noto Sans Thai", Tahoma, sans-serif;
+      line-height: 1.55;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    header {
+      display: grid;
+      gap: 10px;
+      padding: 12px 0 20px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--violet);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--purple);
+      font-family: "Kanit", "Prompt", "Noto Sans Thai", Tahoma, sans-serif;
+      font-size: clamp(30px, 5vw, 50px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 820px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(350px, 0.88fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .card-head {
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, #ffffff 0%, #f4ecff 100%);
+    }
+
+    .card-head h2 {
+      margin: 0;
+      color: var(--purple);
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .card-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card-body {
+      padding: 16px 18px 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    label.field {
+      display: grid;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #cec3dd;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 12px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.13);
+    }
+
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .chip {
+      min-height: 48px;
+      border: 1px solid #dacded;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+
+    .chip::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      border: 2px solid #bcaadb;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .chip:hover {
+      transform: translateY(-1px);
+      border-color: var(--violet);
+    }
+
+    .chip.selected {
+      border-color: var(--violet);
+      background: #f1e8ff;
+      color: var(--purple);
+    }
+
+    .chip.selected::before {
+      border-color: var(--violet);
+      background:
+        linear-gradient(135deg, transparent 45%, #fff 45% 56%, transparent 56%),
+        linear-gradient(45deg, transparent 47%, #fff 47% 60%, transparent 60%),
+        var(--violet);
+    }
+
+    .blue .chip.selected {
+      background: var(--blue);
+    }
+
+    .green .chip.selected {
+      background: var(--green);
+    }
+
+    .yellow .chip.selected {
+      background: var(--yellow);
+    }
+
+    .red .chip.selected {
+      background: var(--red);
+    }
+
+    .hint {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px;
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 14px 32px rgba(43, 8, 119, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn {
+      min-height: 44px;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      background: var(--purple);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      color: var(--purple);
+      border: 1px solid #d8c8f3;
+      background: #f1e8ff;
+    }
+
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .preset {
+      min-height: 40px;
+      border: 1px solid #d8c8f3;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: #fff;
+      color: var(--purple);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .sticky {
+      position: sticky;
+      top: 76px;
+    }
+
+    .output {
+      min-height: 520px;
+      border: 0;
+      background: #17121f;
+      color: #fbf8ff;
+      font: 13px/1.6 Consolas, "Cascadia Mono", monospace;
+      white-space: pre-wrap;
+    }
+
+    .status {
+      align-self: center;
+      color: #137245;
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .guide-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .guide-list li {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .guide-list strong {
+      color: var(--purple);
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky {
+        position: static;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        padding: 14px;
+      }
+
+      .grid-2,
+      .chips {
+        grid-template-columns: 1fr;
+      }
+
+      .chip {
+        border-radius: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p class="eyebrow">Jini Smart Office | AI Employee Setup</p>
+      <h1>ตั้งค่าพนักงาน AI ประจำฝ่าย</h1>
+      <p class="lead">ติ๊กเลือกสิ่งที่ใช่ กรอกเฉพาะข้อมูลจำเป็น แล้วกด Copy เพื่อนำไปแปะใน Instruction ของเครื่องมือ AI ที่ต้องการใช้งาน</p>
+    </header>
+
+    <nav class="toolbar">
+      <button class="btn" type="button" id="build">สร้าง Prompt</button>
+      <button class="btn secondary" type="button" id="copy">Copy ไปใช้</button>
+      <button class="btn secondary" type="button" id="clear">ล้างฟอร์ม</button>
+      <span class="status" id="status"></span>
+    </nav>
+
+    <main class="layout">
+      <section class="stack" aria-label="แบบฟอร์ม">
+        <div class="card">
+          <div class="card-head">
+            <h2>1. ตัวตนและตำแหน่ง</h2>
+            <p>กรอกสั้น ๆ ให้รู้ว่า AI คนนี้เป็นใคร</p>
+          </div>
+          <div class="card-body">
+            <div class="grid-2">
+              <label class="field">ชื่อ AI
+                <input id="name" type="text" placeholder="เช่น น้องมายด์">
+              </label>
+              <label class="field">ตำแหน่ง/ฝ่าย
+                <select id="role">
+                  <option>AI ฝ่ายบัญชี</option>
+                  <option>AI ฝ่ายขาย</option>
+                  <option>AI ฝ่ายจัดซื้อ</option>
+                  <option>AI แอดมินประสานงาน</option>
+                  <option>AI บริการลูกค้า</option>
+                  <option>AI ฝ่ายบุคคล</option>
+                  <option>AI อื่น ๆ</option>
+                </select>
+              </label>
+            </div>
+            <label class="field" style="margin-top:12px;">แฟ้ม/ข้อมูลที่จะให้เพื่อทำงานในตำแหน่งนี้
+              <textarea id="sources" placeholder="เช่น SOP รับเอกสาร, Checklist ภาษีรายเดือน, FAQ ลูกค้าใหม่"></textarea>
+            </label>
+            <div class="preset-row">
+              <button class="preset" type="button" data-preset="accounting">ตัวอย่างบัญชี</button>
+              <button class="preset" type="button" data-preset="sales">ตัวอย่างฝ่ายขาย</button>
+              <button class="preset" type="button" data-preset="purchase">ตัวอย่างจัดซื้อ</button>
+            </div>
+            <p class="hint" style="margin-top:16px;"><strong>มุมมองผู้เชี่ยวชาญเสริม</strong> เลือก 0-2 ข้อ ถ้าอยากให้ AI วิเคราะห์ด้วยหมวกเฉพาะทาง</p>
+            <div class="chips" data-group="perspective">
+              <button class="chip" type="button" data-value="Compliance & Regulation: วิเคราะห์ข้อกำหนด มาตรฐาน และความเสี่ยงด้านกฎระเบียบ">Compliance</button>
+              <button class="chip" type="button" data-value="Financial Risk: ประเมินความเสี่ยงด้านเครดิต สภาพคล่อง ปฏิบัติการ และผลกระทบทางการเงิน">Financial Risk</button>
+              <button class="chip" type="button" data-value="Legal Lens: ตีความข้อกฎหมาย สัญญา และประเด็นที่ต้องให้ผู้เชี่ยวชาญตรวจ">Legal</button>
+              <button class="chip" type="button" data-value="IFRS/TFRS Expert: มองผลกระทบต่อมาตรฐานบัญชี การเปิดเผยข้อมูล และการตรวจสอบได้">IFRS/TFRS</button>
+              <button class="chip" type="button" data-value="Process Architect: มองงานเป็น flowchart ขั้นตอน ระบบ และจุดส่งต่อ">Process</button>
+              <button class="chip" type="button" data-value="Document Editor: จัดโครงสร้างภาษา เอกสาร รายงาน และความสอดคล้องของคำศัพท์">Document Editor</button>
+              <button class="chip" type="button" data-value="Project Manager: มองแผนงาน ทรัพยากร timeline ความคืบหน้า และเจ้าของงาน">Project Manager</button>
+              <button class="chip" type="button" data-value="Multilingual Interpreter: แปล สรุป และเทียบความหมายของเอกสารหลายภาษาอย่างระมัดระวัง">Multilingual</button>
+              <button class="chip" type="button" data-value="Financial Communication: เล่าเรื่องข้อมูล ทำให้งานซับซ้อนเข้าใจง่าย เหมาะกับผู้บริหารหรือ presentation">Financial Communication</button>
+              <button class="chip" type="button" data-value="Digital Assets & CBDC: มองความเสี่ยงและข้อกำกับที่เกี่ยวกับสินทรัพย์ดิจิทัล Stablecoin และ CBDC">Digital Assets</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>2. JD: หน้าที่หลัก</h2>
+            <p>เลือกได้หลายข้อ หรือพิมพ์เพิ่มเองด้านล่าง</p>
+          </div>
+          <div class="card-body">
+            <div class="chips" data-group="jd">
+              <button class="chip" type="button" data-value="ตอบคำถามจากข้อมูลในแฟ้มฝ่าย">ตอบคำถามจากแฟ้มฝ่าย</button>
+              <button class="chip" type="button" data-value="สรุปขั้นตอนการทำงาน">สรุปขั้นตอนการทำงาน</button>
+              <button class="chip" type="button" data-value="สร้าง checklist จาก SOP">สร้าง checklist จาก SOP</button>
+              <button class="chip" type="button" data-value="ร่างอีเมลหรือ LINE ตามนโยบาย">ร่างอีเมล/LINE</button>
+              <button class="chip" type="button" data-value="ตรวจความครบถ้วนของเอกสาร">ตรวจเอกสารครบไหม</button>
+              <button class="chip" type="button" data-value="ค้นเงื่อนไข ราคา หรือ policy">ค้นเงื่อนไข ราคา policy</button>
+            </div>
+            <label class="field" style="margin-top:14px;">เพิ่ม JD เอง <span style="font-weight:400;color:var(--muted)">(บรรทัดละ 1 ข้อ)</span>
+              <textarea id="jd_custom" placeholder="เช่น ประสานงานกับคู่ค้า&#10;จัดทำรายงานประจำเดือน&#10;ดูแลสต็อกสินค้า"></textarea>
+            </label>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>3. SOUL.md: นิสัยและบุคลิก</h2>
+            <p>เลือก 3-5 ข้อพอ ให้ AI มีสไตล์ชัด</p>
+          </div>
+          <div class="card-body blue">
+            <div class="chips" data-group="soul">
+              <button class="chip" type="button" data-value="สุภาพและมืออาชีพ">สุภาพ</button>
+              <button class="chip" type="button" data-value="รอบคอบ ไม่รีบสรุป">รอบคอบ</button>
+              <button class="chip" type="button" data-value="กระชับ ตรงประเด็น">กระชับ</button>
+              <button class="chip" type="button" data-value="ตอบเป็นระบบ ใช้ bullet หรือ checklist">เป็นระบบ</button>
+              <button class="chip" type="button" data-value="ไม่เดา ถ้าไม่มีข้อมูลให้บอกว่าไม่พบ">ไม่เดา</button>
+              <button class="chip" type="button" data-value="ถามกลับเมื่อข้อมูลไม่ครบ">ถามกลับ</button>
+              <button class="chip" type="button" data-value="ขี้สงสัย ชอบถามต่อเพื่อหาสาเหตุและบริบท">ขี้สงสัย</button>
+              <button class="chip" type="button" data-value="หัวคำนวณ ตรวจตัวเลขและตรรกะอย่างเป็นระบบ">หัวคำนวณ</button>
+              <button class="chip" type="button" data-value="นักจับช่องว่าง มองหา gap ความไม่สอดคล้อง และสิ่งที่ยังขาด">จับ Gap</button>
+              <button class="chip" type="button" data-value="คิดเป็น flowchart เห็นลำดับงาน จุดตัดสินใจ และจุดส่งต่อ">คิดเป็น Flow</button>
+              <button class="chip" type="button" data-value="แม่นถ้อยคำ ระวังคำศัพท์เฉพาะ ข้อกฎหมาย และความหมายที่คลาดเคลื่อน">แม่นถ้อยคำ</button>
+              <button class="chip" type="button" data-value="โปร่งใส ตรวจสอบได้ และแยกข้อเท็จจริงออกจากความเห็น">โปร่งใสตรวจสอบได้</button>
+              <button class="chip" type="button" data-value="สื่อสารเพื่อลดความขัดแย้ง ทำให้แผนงานใช้งานได้จริง">ลดความขัดแย้ง</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>4. รูปแบบคำตอบ</h2>
+            <p>ให้ AI ตอบออกมาเป็นรูปแบบที่ทีมใช้ต่อได้ทันที</p>
+          </div>
+          <div class="card-body">
+            <div class="chips" data-group="output">
+              <button class="chip" type="button" data-value="Checklist">Checklist</button>
+              <button class="chip" type="button" data-value="ตาราง">ตาราง</button>
+              <button class="chip" type="button" data-value="ขั้นตอนทีละข้อ">ขั้นตอน</button>
+              <button class="chip" type="button" data-value="ร่างอีเมล">ร่างอีเมล</button>
+              <button class="chip" type="button" data-value="ร่าง LINE">ร่าง LINE</button>
+              <button class="chip" type="button" data-value="FAQ">FAQ</button>
+              <button class="chip" type="button" data-value="สรุปบรรยายให้อ่านเข้าใจง่าย">สรุปบรรยาย</button>
+              <button class="chip" type="button" data-value="อธิบายแบบเด็ก 10 ขวบเข้าใจ">อธิบายเด็ก 10 ขวบ</button>
+              <button class="chip" type="button" data-value="กระชับ ตรงประเด็น ไม่เกิน 200 คำ">ไม่เกิน 200 คำ</button>
+              <button class="chip" type="button" data-value="หัวข้อสำคัญให้ใส่ภาษาไทยและวงเล็บภาษาอังกฤษ เช่น ความเสี่ยง (Risk)">ไทย + English key terms</button>
+              <button class="chip" type="button" data-value="สรุปแบบ Timeline เรียงตามเวลา วันที่ และเหตุการณ์สำคัญ">Timeline</button>
+              <button class="chip" type="button" data-value="สรุปแบบ Problem-Solution: ปัญหา → สาเหตุ → วิธีแก้">Problem-Solution</button>
+              <button class="chip" type="button" data-value="สรุปเป็น bullet points ที่เหมาะสำหรับทำ Mind Map">Mind Map bullets</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>5. เขตแดนแบบ SoD</h2>
+            <p>เริ่มจากแบ่งเขตแดนให้ชัด: ควรรู้เท่าที่จำเป็นต่อหน้าที่ และห้ามตอบเรื่องที่เสี่ยงหรือเกินอำนาจ</p>
+          </div>
+          <div class="card-body">
+            <p class="hint"><strong>ควรรู้ / Access</strong></p>
+            <div class="chips green" data-group="access">
+              <button class="chip" type="button" data-value="ขั้นตอนงานในฝ่ายตัวเอง">ขั้นตอนงานในฝ่าย</button>
+              <button class="chip" type="button" data-value="Checklist และ template ที่ใช้ประจำ">Checklist/Template</button>
+              <button class="chip" type="button" data-value="FAQ และคำตอบมาตรฐาน">FAQ มาตรฐาน</button>
+              <button class="chip" type="button" data-value="ผู้รับผิดชอบและช่องทางส่งต่อ">ผู้รับผิดชอบ</button>
+            </div>
+
+            <p class="hint" style="margin-top:16px;"><strong>ห้ามรู้ / Restricted</strong></p>
+            <div class="chips red" data-group="restricted">
+              <button class="chip" type="button" data-value="รหัสผ่าน API key หรือข้อมูล login">รหัสผ่าน/API key</button>
+              <button class="chip" type="button" data-value="ข้อมูลส่วนบุคคลละเอียดอ่อน">ข้อมูลส่วนบุคคล</button>
+              <button class="chip" type="button" data-value="เงินเดือนหรือข้อมูล HR ที่ไม่เกี่ยวข้อง">เงินเดือน/HR</button>
+              <button class="chip" type="button" data-value="สัญญา ราคา หรือส่วนลดที่ยังไม่อนุมัติ">ราคา/สัญญายังไม่อนุมัติ</button>
+              <button class="chip" type="button" data-value="ตัวเลขภาษีสุดท้ายก่อนผู้เชี่ยวชาญตรวจ">ตัวเลขภาษีสุดท้าย</button>
+              <button class="chip" type="button" data-value="ข้อมูลข้ามฝ่ายที่ไม่เกี่ยวข้องกับตำแหน่ง">ข้อมูลข้ามฝ่าย</button>
+              <button class="chip" type="button" data-value="ยอดขายรายคนหรือ performance ส่วนบุคคล">ยอดขายรายคน</button>
+              <button class="chip" type="button" data-value="ต้นทุนสินค้า margin หรือข้อมูลกำไรที่ไม่ควรเปิดเผย">ต้นทุนสินค้า / margin</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>6. Human Checkpoint</h2>
+            <p>เรื่องไหน AI ช่วยร่างได้ แต่ต้องให้คนตรวจ</p>
+          </div>
+          <div class="card-body yellow">
+            <div class="chips" data-group="human">
+              <button class="chip" type="button" data-value="ก่อนส่งข้อความถึงลูกค้า">ก่อนส่งลูกค้า</button>
+              <button class="chip" type="button" data-value="ก่อนใช้ตัวเลขภาษีหรือบัญชี">ก่อนใช้ตัวเลขภาษี</button>
+              <button class="chip" type="button" data-value="ก่อนอนุมัติราคา ส่วนลด หรือวงเงิน">ก่อนอนุมัติวงเงิน</button>
+              <button class="chip" type="button" data-value="ก่อนตอบเรื่องกฎหมาย ภาษี หรือสัญญา">ก่อนตอบเรื่องเสี่ยง</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>7. คำถามสัมภาษณ์ AI</h2>
+            <p>ใช้ถามหลังตั้งค่า AI แล้ว เพื่อทดสอบว่าพร้อมทำงานไหม</p>
+          </div>
+          <div class="card-body">
+            <div class="grid-2">
+              <label class="field">ถามจากแฟ้ม
+                <input id="q1" type="text" placeholder="เช่น เอกสารจากฝ่ายขายต้องมีอะไรบ้าง">
+              </label>
+              <label class="field">ถามแบบ checklist
+                <input id="q2" type="text" placeholder="เช่น ทำ checklist เอกสารที่ยังขาด">
+              </label>
+              <label class="field">คำถามที่ควรตอบว่าไม่รู้
+                <input id="q3" type="text" placeholder="เช่น เงินเดือนพนักงานแต่ละคนเท่าไร">
+              </label>
+              <label class="field">คำถามที่ต้องส่งให้คนตรวจ
+                <input id="q4" type="text" placeholder="เช่น เอกสารชุดนี้ยื่นภาษีได้เลยไหม">
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="stack sticky">
+        <div class="card">
+          <div class="card-head">
+            <h2>Guideline สั้น ๆ</h2>
+            <p>จุดที่ต้องจำตอนสร้างพนักงาน AI</p>
+          </div>
+          <div class="card-body">
+            <ul class="guide-list">
+              <li><strong>JD</strong><br>เขาทำหน้าที่อะไร</li>
+              <li><strong>SOUL.md</strong><br>เขาตอบด้วยนิสัยและน้ำเสียงแบบไหน</li>
+              <li><strong>Access</strong><br>เขาควรรู้เท่าที่จำเป็นต่อหน้าที่</li>
+              <li><strong>Restricted</strong><br>ข้อมูลไหนห้ามรู้หรือห้ามตอบ</li>
+              <li><strong>Human Checkpoint</strong><br>เรื่องไหนต้องให้คนตรวจ ก่อนนำไปใช้จริง</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>Prompt พร้อม Copy</h2>
+            <p>คัดลอกไปแปะใน Instruction ของเครื่องมือ AI</p>
+          </div>
+          <div class="card-body">
+            <textarea id="output" class="output" readonly></textarea>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const status = $("status");
+
+    const presets = {
+      accounting: {
+        name: "น้องมายด์",
+        role: "AI ฝ่ายบัญชี",
+        sources: "SOP การรับเอกสารจากฝ่ายขาย\nChecklist เอกสารภาษีรายเดือน\nFAQ ที่ฝ่ายขายถามบัญชีบ่อย",
+        perspective: ["IFRS/TFRS Expert: มองผลกระทบต่อมาตรฐานบัญชี การเปิดเผยข้อมูล และการตรวจสอบได้", "Compliance & Regulation: วิเคราะห์ข้อกำหนด มาตรฐาน และความเสี่ยงด้านกฎระเบียบ"],
+        jd: ["ตอบคำถามจากข้อมูลในแฟ้มฝ่าย", "สร้าง checklist จาก SOP", "ตรวจความครบถ้วนของเอกสาร"],
+        soul: ["สุภาพและมืออาชีพ", "รอบคอบ ไม่รีบสรุป", "ไม่เดา ถ้าไม่มีข้อมูลให้บอกว่าไม่พบ", "ตอบเป็นระบบ ใช้ bullet หรือ checklist", "หัวคำนวณ ตรวจตัวเลขและตรรกะอย่างเป็นระบบ", "โปร่งใส ตรวจสอบได้ และแยกข้อเท็จจริงออกจากความเห็น"],
+        output: ["Checklist", "ตาราง", "ขั้นตอนทีละข้อ", "สรุปบรรยายให้อ่านเข้าใจง่าย", "สรุปแบบ Problem-Solution: ปัญหา → สาเหตุ → วิธีแก้"],
+        access: ["ขั้นตอนงานในฝ่ายตัวเอง", "Checklist และ template ที่ใช้ประจำ", "ผู้รับผิดชอบและช่องทางส่งต่อ"],
+        restricted: ["รหัสผ่าน API key หรือข้อมูล login", "ข้อมูลส่วนบุคคลละเอียดอ่อน", "ตัวเลขภาษีสุดท้ายก่อนผู้เชี่ยวชาญตรวจ", "ยอดขายรายคนหรือ performance ส่วนบุคคล"],
+        human: ["ก่อนส่งข้อความถึงลูกค้า", "ก่อนใช้ตัวเลขภาษีหรือบัญชี", "ก่อนตอบเรื่องกฎหมาย ภาษี หรือสัญญา"],
+        q1: "เอกสารจากฝ่ายขายต้องมีอะไรบ้าง",
+        q2: "ช่วยทำ checklist เอกสารที่ยังขาด",
+        q3: "เงินเดือนพนักงานแต่ละคนเท่าไร",
+        q4: "เอกสารชุดนี้ยื่นภาษีได้เลยไหม"
+      },
+      sales: {
+        name: "น้องเซลล์",
+        role: "AI ฝ่ายขาย",
+        sources: "ราคาและแพ็กเกจบริการ\nFAQ ลูกค้าใหม่\nTemplate LINE ตอบลูกค้า\nเงื่อนไขการขายที่อนุมัติแล้ว",
+        perspective: ["Financial Communication: เล่าเรื่องข้อมูล ทำให้งานซับซ้อนเข้าใจง่าย เหมาะกับผู้บริหารหรือ presentation"],
+        jd: ["ตอบคำถามจากข้อมูลในแฟ้มฝ่าย", "ร่างอีเมลหรือ LINE ตามนโยบาย", "ค้นเงื่อนไข ราคา หรือ policy"],
+        soul: ["สุภาพและมืออาชีพ", "กระชับ ตรงประเด็น", "ถามกลับเมื่อข้อมูลไม่ครบ", "ไม่เดา ถ้าไม่มีข้อมูลให้บอกว่าไม่พบ", "ขี้สงสัย ชอบถามต่อเพื่อหาสาเหตุและบริบท"],
+        output: ["ร่าง LINE", "ร่างอีเมล", "FAQ", "อธิบายแบบเด็ก 10 ขวบเข้าใจ", "กระชับ ตรงประเด็น ไม่เกิน 200 คำ"],
+        access: ["FAQ และคำตอบมาตรฐาน", "Checklist และ template ที่ใช้ประจำ", "ผู้รับผิดชอบและช่องทางส่งต่อ"],
+        restricted: ["เงินเดือนหรือข้อมูล HR ที่ไม่เกี่ยวข้อง", "สัญญา ราคา หรือส่วนลดที่ยังไม่อนุมัติ", "ข้อมูลข้ามฝ่ายที่ไม่เกี่ยวข้องกับตำแหน่ง", "ต้นทุนสินค้า margin หรือข้อมูลกำไรที่ไม่ควรเปิดเผย"],
+        human: ["ก่อนส่งข้อความถึงลูกค้า", "ก่อนอนุมัติราคา ส่วนลด หรือวงเงิน"],
+        q1: "ลูกค้าใหม่ต้องส่งข้อมูลอะไรให้ฝ่ายขาย",
+        q2: "ทำ checklist ก่อนเสนอราคา",
+        q3: "เงินเดือนทีมขายแต่ละคนเท่าไร",
+        q4: "อนุมัติส่วนลด 20% ได้เลยไหม"
+      },
+      purchase: {
+        name: "น้องจัดซื้อ",
+        role: "AI ฝ่ายจัดซื้อ",
+        sources: "รายชื่อ Vendor ที่อนุมัติแล้ว\nPolicy วงเงินอนุมัติ\nSOP เปิดใบสั่งซื้อ\nTemplate ขออนุมัติซื้อ",
+        perspective: ["Process Architect: มองงานเป็น flowchart ขั้นตอน ระบบ และจุดส่งต่อ", "Financial Risk: ประเมินความเสี่ยงด้านเครดิต สภาพคล่อง ปฏิบัติการ และผลกระทบทางการเงิน"],
+        jd: ["ตอบคำถามจากข้อมูลในแฟ้มฝ่าย", "สรุปขั้นตอนการทำงาน", "ค้นเงื่อนไข ราคา หรือ policy"],
+        soul: ["รอบคอบ ไม่รีบสรุป", "ไม่เดา ถ้าไม่มีข้อมูลให้บอกว่าไม่พบ", "ตอบเป็นระบบ ใช้ bullet หรือ checklist", "หัวคำนวณ ตรวจตัวเลขและตรรกะอย่างเป็นระบบ", "คิดเป็น flowchart เห็นลำดับงาน จุดตัดสินใจ และจุดส่งต่อ"],
+        output: ["Checklist", "ตาราง", "ขั้นตอนทีละข้อ", "สรุปบรรยายให้อ่านเข้าใจง่าย", "สรุปแบบ Timeline เรียงตามเวลา วันที่ และเหตุการณ์สำคัญ"],
+        access: ["ขั้นตอนงานในฝ่ายตัวเอง", "Checklist และ template ที่ใช้ประจำ", "ผู้รับผิดชอบและช่องทางส่งต่อ"],
+        restricted: ["ข้อมูลข้ามฝ่ายที่ไม่เกี่ยวข้องกับตำแหน่ง", "สัญญา ราคา หรือส่วนลดที่ยังไม่อนุมัติ", "ข้อมูลส่วนบุคคลละเอียดอ่อน", "ยอดขายรายคนหรือ performance ส่วนบุคคล", "ต้นทุนสินค้า margin หรือข้อมูลกำไรที่ไม่ควรเปิดเผย"],
+        human: ["ก่อนอนุมัติราคา ส่วนลด หรือวงเงิน", "ก่อนตอบเรื่องกฎหมาย ภาษี หรือสัญญา"],
+        q1: "ใบสั่งซื้อเกิน 50,000 บาทต้องให้ใครเซ็น",
+        q2: "ทำ checklist ก่อนเปิด PO",
+        q3: "margin ของลูกค้า ABC คือเท่าไร",
+        q4: "อนุมัติ Vendor รายใหม่นี้ได้เลยไหม"
+      }
+    };
+
+    function groupValues(group) {
+      return [...document.querySelectorAll(`[data-group="${group}"] .selected`)].map((button) => button.dataset.value);
+    }
+
+    function setGroup(group, values) {
+      document.querySelectorAll(`[data-group="${group}"] .chip`).forEach((button) => {
+        button.classList.toggle("selected", values.includes(button.dataset.value));
+      });
+    }
+
+    function cleanLines(text) {
+      return text.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+    }
+
+    function bullets(items) {
+      return items.length ? items.map((item) => `- ${item}`).join("\n") : "-";
+    }
+
+    function buildPrompt() {
+      const name = $("name").value.trim() || "[ชื่อ AI]";
+      const role = $("role").value.trim() || "[ตำแหน่ง]";
+      const sourceLines = cleanLines($("sources").value);
+      const allJD = [...groupValues("jd"), ...cleanLines($("jd_custom").value)];
+      const prompt = `# AI Employee Card: ${name} (${role})
+
+## IDENTITY
+คุณคือ ${name} ตำแหน่ง ${role}
+
+## SPECIALIST LENS: มุมมองผู้เชี่ยวชาญเสริม
+${bullets(groupValues("perspective"))}
+
+## JD: หน้าที่หลัก
+${bullets(allJD)}
+
+## SOUL.md: บุคลิกและวิธีตอบ
+${bullets(groupValues("soul"))}
+
+ถ้าไม่พบข้อมูลในแฟ้ม ให้ตอบว่า:
+"ยังไม่พบข้อมูลในแฟ้มนี้ กรุณาตรวจสอบกับผู้รับผิดชอบก่อนใช้งานจริง"
+
+## SOURCES: แฟ้ม/ข้อมูลที่ใช้เพื่อทำงานในตำแหน่งนี้
+${bullets(sourceLines)}
+
+## OUTPUT FORMAT
+ควรตอบในรูปแบบ:
+${bullets(groupValues("output"))}
+
+## ACCESS: เรื่องที่ควรรู้
+${bullets(groupValues("access"))}
+
+## RESTRICTED: เรื่องที่ห้ามรู้หรือห้ามตอบ
+${bullets(groupValues("restricted"))}
+
+ถ้าถูกถามเรื่อง Restricted ให้ตอบว่า:
+"ข้อมูลนี้อยู่นอกขอบเขตของตำแหน่งนี้ กรุณาตรวจสอบกับผู้รับผิดชอบก่อนใช้งาน"
+
+## HUMAN CHECKPOINT
+เรื่องต่อไปนี้ต้องให้มนุษย์ตรวจหรืออนุมัติก่อนใช้จริง:
+${bullets(groupValues("human"))}
+
+## INTERVIEW / AUDIT TEST
+ใช้คำถามเหล่านี้ทดสอบหลังตั้งค่า AI:
+1. คำถามจากแฟ้ม: ${$("q1").value.trim() || "-"}
+2. คำถามแบบ checklist: ${$("q2").value.trim() || "-"}
+3. คำถามที่ควรตอบว่าไม่รู้: ${$("q3").value.trim() || "-"}
+4. คำถามที่ต้องส่งให้คนตรวจ: ${$("q4").value.trim() || "-"}
+`;
+      $("output").value = prompt;
+      return prompt;
+    }
+
+    function setStatus(text) {
+      status.textContent = text;
+      clearTimeout(window.__timer);
+      window.__timer = setTimeout(() => status.textContent = "", 2400);
+    }
+
+    function applyPreset(name) {
+      const preset = presets[name];
+      if (!preset) return;
+      ["name", "role", "sources", "q1", "q2", "q3", "q4"].forEach((id) => {
+        $(id).value = preset[id] || "";
+      });
+      ["perspective", "jd", "soul", "output", "access", "restricted", "human"].forEach((group) => {
+        setGroup(group, preset[group] || []);
+      });
+      buildPrompt();
+      setStatus("เติมตัวอย่างแล้ว");
+    }
+
+    document.querySelectorAll(".chip").forEach((button) => {
+      button.addEventListener("click", () => {
+        button.classList.toggle("selected");
+        buildPrompt();
+      });
+    });
+
+    document.querySelectorAll("[data-preset]").forEach((button) => {
+      button.addEventListener("click", () => applyPreset(button.dataset.preset));
+    });
+
+    document.querySelectorAll("input, textarea, select").forEach((input) => {
+      input.addEventListener("input", buildPrompt);
+      input.addEventListener("change", buildPrompt);
+    });
+
+    $("build").addEventListener("click", () => {
+      buildPrompt();
+      setStatus("สร้าง Prompt แล้ว");
+    });
+
+    $("copy").addEventListener("click", async () => {
+      const prompt = buildPrompt();
+      try {
+        await navigator.clipboard.writeText(prompt);
+        setStatus("Copy แล้ว พร้อมแปะใน Instruction");
+      } catch (error) {
+        $("output").select();
+        document.execCommand("copy");
+        setStatus("Copy แล้ว");
+      }
+    });
+
+    $("clear").addEventListener("click", () => {
+      if (!confirm("ล้างข้อมูลทั้งหมด?")) return;
+      document.querySelectorAll(".chip").forEach((button) => button.classList.remove("selected"));
+      document.querySelectorAll("input, textarea").forEach((input) => input.value = "");
+      $("role").selectedIndex = 0;
+      buildPrompt();
+      setStatus("ล้างฟอร์มแล้ว");
+    });
+
+    applyPreset("accounting");
+  </script>
+</body>
+</html>
