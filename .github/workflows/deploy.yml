@@ -1,0 +1,16 @@
+name: Deploy to skill.jinjuta.info
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Netlify
+        run: npx netlify-cli deploy --prod --dir=. --site=28efa1dd-a42e-4cb1-ad56-5f2bbd026b20
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
