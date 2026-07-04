@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ใบสมัครงาน AIKM — AI Knowledge Manager</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800;900&family=Prompt:wght@400;500;600;700;800;900&display=swap");
+
+    :root {
+      --ink: #1a1200;
+      --muted: #7a6b4e;
+      --purple: #2b0877;
+      --amber: #d97706;
+      --amber-dark: #b45309;
+      --amber-mid: #fbbf24;
+      --amber-light: #fef3c7;
+      --soft: #fffdf5;
+      --line: #e8d9a8;
+      --blue: #eaf3ff;
+      --green: #eaf9ef;
+      --yellow: #fff4ca;
+      --red: #fff0f0;
+      --panel: #ffffff;
+      --shadow: 0 18px 48px rgba(180, 120, 0, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fffdf5 0%, #fef9e7 52%, #ffffff 100%);
+      font-family: "Prompt", "Kanit", "Noto Sans Thai", Tahoma, sans-serif;
+      line-height: 1.55;
+    }
+
+    button, input, textarea, select { font: inherit; }
+
+    .page { max-width: 1180px; margin: 0 auto; padding: 24px; }
+
+    header { display: grid; gap: 10px; padding: 12px 0 20px; }
+
+    .eyebrow { margin: 0; color: var(--amber-dark); font-size: 14px; font-weight: 850; }
+
+    h1 {
+      margin: 0;
+      color: var(--purple);
+      font-family: "Kanit", "Prompt", "Noto Sans Thai", Tahoma, sans-serif;
+      font-size: clamp(30px, 5vw, 50px);
+      line-height: 1.08;
+    }
+
+    .lead { max-width: 820px; margin: 0; color: var(--muted); font-size: 17px; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(350px, 0.88fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .stack { display: grid; gap: 14px; }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .card-head {
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, #ffffff 0%, #fef9e7 100%);
+    }
+
+    .card-head h2 { margin: 0; color: var(--purple); font-size: 20px; line-height: 1.25; }
+    .card-head p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+
+    .card-body { padding: 16px 18px 18px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    label.field { display: grid; gap: 6px; font-size: 14px; font-weight: 800; color: var(--purple); }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #d4c8a0;
+      border-radius: 8px;
+      background: #fffdf5;
+      color: var(--ink);
+      padding: 12px;
+      outline: none;
+      font-weight: 400;
+    }
+
+    textarea { min-height: 92px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.12);
+    }
+
+    .fixed-label {
+      width: 100%;
+      border: 1px solid #d4c8a0;
+      border-radius: 8px;
+      background: #fefce8;
+      color: var(--purple);
+      padding: 12px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .chip {
+      min-height: 48px;
+      border: 1px solid #e0cc90;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+
+    .chip::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      border: 2px solid #c8a840;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .chip:hover { transform: translateY(-1px); border-color: var(--amber); }
+
+    .chip.selected {
+      border-color: var(--amber);
+      background: var(--amber-light);
+      color: #92400e;
+    }
+
+    .chip.selected::before {
+      border-color: var(--amber);
+      background:
+        linear-gradient(135deg, transparent 45%, #fff 45% 56%, transparent 56%),
+        linear-gradient(45deg, transparent 47%, #fff 47% 60%, transparent 60%),
+        var(--amber);
+    }
+
+    .blue .chip.selected { background: var(--blue); }
+    .green .chip.selected { background: var(--green); color: #14532d; border-color: #22c55e; }
+    .green .chip.selected::before { border-color: #22c55e; background:
+      linear-gradient(135deg, transparent 45%, #fff 45% 56%, transparent 56%),
+      linear-gradient(45deg, transparent 47%, #fff 47% 60%, transparent 60%),
+      #22c55e;
+    }
+    .yellow .chip.selected { background: var(--yellow); }
+    .red .chip.selected { background: var(--red); color: #7f1d1d; border-color: #ef4444; }
+    .red .chip.selected::before { border-color: #ef4444; background:
+      linear-gradient(135deg, transparent 45%, #fff 45% 56%, transparent 56%),
+      linear-gradient(45deg, transparent 47%, #fff 47% 60%, transparent 60%),
+      #ef4444;
+    }
+
+    .hint { margin: 0 0 12px; color: var(--muted); font-size: 13px; }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px;
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(255, 253, 245, 0.95);
+      box-shadow: 0 14px 32px rgba(180, 120, 0, 0.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn {
+      min-height: 44px;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: #fff;
+      background: var(--purple);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      color: var(--purple);
+      border: 1.5px solid #e0cc90;
+      background: #fef9e7;
+    }
+
+    .btn.secondary:hover { background: var(--amber-light); border-color: var(--amber); }
+
+    .preset-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+    .preset {
+      min-height: 40px;
+      border: 1.5px solid #e0cc90;
+      border-radius: 999px;
+      padding: 8px 14px;
+      background: #fff;
+      color: var(--purple);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .preset:hover { background: var(--amber-light); border-color: var(--amber); }
+
+    .sticky { position: sticky; top: 76px; }
+
+    .output {
+      min-height: 520px;
+      border: 0;
+      background: #1a1200;
+      color: #fffdf5;
+      font: 13px/1.6 Consolas, "Cascadia Mono", monospace;
+      white-space: pre-wrap;
+    }
+
+    .status { align-self: center; color: #15803d; font-size: 14px; font-weight: 850; }
+
+    .guide-list {
+      display: grid; gap: 10px; margin: 0; padding: 0; list-style: none;
+    }
+
+    .guide-list li {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf5;
+    }
+
+    .guide-list strong { color: var(--purple); }
+
+    /* Personality cards — radio style */
+    .personality-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .persona-card {
+      border: 2px solid #e8d9a8;
+      border-radius: 12px;
+      padding: 18px 16px;
+      background: #fff;
+      cursor: pointer;
+      text-align: left;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .persona-card:hover { transform: translateY(-2px); border-color: var(--amber-mid); }
+
+    .persona-card .persona-icon { font-size: 28px; line-height: 1; }
+
+    .persona-card .persona-name { font-size: 18px; font-weight: 900; color: var(--purple); }
+
+    .persona-card .persona-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    .persona-radio {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #c8a840;
+      border-radius: 50%;
+      background: #fff;
+      margin-top: 4px;
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
+
+    /* Advisor = green */
+    .persona-card[data-persona="Advisor"].selected {
+      border-color: #22c55e;
+      background: #f0fdf4;
+    }
+    .persona-card[data-persona="Advisor"].selected .persona-radio {
+      border-color: #22c55e;
+      background: radial-gradient(circle, #22c55e 40%, transparent 40%);
+    }
+    .persona-card[data-persona="Advisor"].selected .persona-name { color: #15803d; }
+
+    /* Analyst = amber/yellow */
+    .persona-card[data-persona="Analyst"].selected {
+      border-color: var(--amber);
+      background: var(--amber-light);
+    }
+    .persona-card[data-persona="Analyst"].selected .persona-radio {
+      border-color: var(--amber);
+      background: radial-gradient(circle, var(--amber) 40%, transparent 40%);
+    }
+    .persona-card[data-persona="Analyst"].selected .persona-name { color: var(--amber-dark); }
+
+    /* Investigator = red */
+    .persona-card[data-persona="Investigator"].selected {
+      border-color: #ef4444;
+      background: #fef2f2;
+    }
+    .persona-card[data-persona="Investigator"].selected .persona-radio {
+      border-color: #ef4444;
+      background: radial-gradient(circle, #ef4444 40%, transparent 40%);
+    }
+    .persona-card[data-persona="Investigator"].selected .persona-name { color: #b91c1c; }
+
+    /* Skill card for section 8 */
+    .skill-card-wrap { display: none; }
+    .skill-card-wrap.visible { display: block; }
+
+    .skill-card {
+      border: 2px solid #e8d9a8;
+      border-radius: 12px;
+      padding: 18px;
+      background: #fffdf5;
+    }
+
+    .skill-card.analyst-skill { border-color: var(--amber); background: var(--amber-light); }
+    .skill-card.investigator-skill { border-color: #ef4444; background: #fef2f2; }
+
+    .skill-card-title { font-size: 17px; font-weight: 900; color: var(--purple); margin-bottom: 6px; }
+
+    .skill-card.analyst-skill .skill-card-title { color: var(--amber-dark); }
+    .skill-card.investigator-skill .skill-card-title { color: #b91c1c; }
+
+    .skill-card-desc { font-size: 13.5px; color: var(--muted); margin-bottom: 14px; line-height: 1.55; }
+
+    .skill-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--purple);
+    }
+
+    .skill-toggle input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--amber);
+      flex-shrink: 0;
+    }
+
+    /* Analyst-only chip */
+    .analyst-only { display: none; }
+    .analyst-mode .analyst-only { display: flex; }
+
+    /* Position nav pills */
+    .pos-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 4px 0 8px;
+    }
+
+    .pos-nav span { font-size: 13px; font-weight: 700; color: var(--muted); align-self: center; }
+
+    .pos-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 36px;
+      padding: 6px 14px;
+      border: 1.5px solid #d4c8a0;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: border-color 140ms, background 140ms, color 140ms;
+    }
+
+    .pos-pill:hover { background: #fef9e7; border-color: var(--amber); color: var(--purple); }
+
+    .pos-pill.active {
+      border-color: var(--amber);
+      background: var(--amber-light);
+      color: var(--purple);
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .sticky { position: static; }
+      .personality-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .page { padding: 14px; }
+      .grid-2, .chips { grid-template-columns: 1fr; }
+      .chip { border-radius: 10px; }
+      .personality-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p class="eyebrow">
+        <a href="https://jinjuta.info" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Jini Smart Office | AIKM Setup</a>
+      </p>
+      <h1>ใบสมัครงาน AIKM<br><span style="font-size:0.55em;font-weight:600;color:var(--muted)">AI Knowledge Manager — รู้ทุกฝ่าย</span></h1>
+      <div class="pos-nav">
+        <span>ตำแหน่งอื่นๆ:</span>
+        <a class='pos-pill' href='/ai-employee-form'>← AI Employee</a>
+        <a class='pos-pill active' href='/aikm-form'>🧠 AI Knowledge Manager</a>
+      </div>
+      <p class="lead">AIKM ต่างจาก AI Employee ตรงที่รู้ข้อมูลทุกฝ่าย วิเคราะห์ข้ามฝ่าย และมีบุคลิกที่เลือกได้ · ติ๊กให้มากที่สุด กด Copy แล้วแปะใน Instruction ทันที</p>
+    </header>
+
+    <nav class="toolbar">
+      <button class="btn" type="button" id="build">สร้าง Prompt</button>
+      <button class="btn secondary" type="button" id="copy">Copy ไปใช้</button>
+      <button class="btn secondary" type="button" id="clear">ล้างฟอร์ม</button>
+      <span class="status" id="status"></span>
+    </nav>
+
+    <main class="layout">
+      <section class="stack" aria-label="แบบฟอร์ม AIKM">
+
+        <!-- หมวด 1 -->
+        <div class="card">
+          <div class="card-head">
+            <h2>1. ตัวตนและตำแหน่ง</h2>
+            <p>กรอกสั้น ๆ ให้รู้ว่า AIKM ตัวนี้เป็นใคร</p>
+          </div>
+          <div class="card-body">
+            <div class="grid-2">
+              <label class="field">ชื่อ AI
+                <input id="name" type="text" placeholder="เช่น น้องตาไว">
+              </label>
+              <label class="field">ตำแหน่ง
+                <div class="fixed-label">🧠 AI Knowledge Manager (รู้ทุกฝ่าย)</div>
+              </label>
+            </div>
+            <label class="field" style="margin-top:12px;">แฟ้ม/ข้อมูลที่จะให้ AIKM
+              <textarea id="sources">TM-ORG-001 ตารางผู้รับผิดชอบ
+TM-POL-001 นโยบายและ SOP ระหว่างฝ่าย
+สรุปข้อมูลจาก NB ฝ่ายขาย/จัดซื้อ/บัญชี</textarea>
+            </label>
+            <div class="preset-row">
+              <button class="preset" type="button" data-preset="org">ตัวอย่าง TM-ORG-001</button>
+              <button class="preset" type="button" data-preset="pol">ตัวอย่าง TM-POL-001</button>
+              <button class="preset" type="button" data-preset="nb">ตัวอย่างสรุป NB ฝ่าย</button>
+            </div>
+            <p class="hint" style="margin-top:16px;"><strong>มุมมองผู้เชี่ยวชาญเสริม</strong> เลือก 0-2 ข้อ</p>
+            <div class="chips" data-group="perspective">
+              <button class="chip" type="button" data-value="Compliance & Regulation: วิเคราะห์ข้อกำหนด มาตรฐาน และความเสี่ยงด้านกฎระเบียบ">Compliance</button>
+              <button class="chip" type="button" data-value="Financial Risk: ประเมินความเสี่ยงด้านเครดิต สภาพคล่อง ปฏิบัติการ และผลกระทบทางการเงิน">Financial Risk</button>
+              <button class="chip" type="button" data-value="Legal Lens: ตีความข้อกฎหมาย สัญญา และประเด็นที่ต้องให้ผู้เชี่ยวชาญตรวจ">Legal</button>
+              <button class="chip" type="button" data-value="IFRS/TFRS Expert: มองผลกระทบต่อมาตรฐานบัญชี การเปิดเผยข้อมูล และการตรวจสอบได้">IFRS/TFRS</button>
+              <button class="chip" type="button" data-value="Process Architect: มองงานเป็น flowchart ขั้นตอน ระบบ และจุดส่งต่อ">Process</button>
+              <button class="chip" type="button" data-value="Document Editor: จัดโครงสร้างภาษา เอกสาร รายงาน และความสอดคล้องของคำศัพท์">Document Editor</button>
+              <button class="chip" type="button" data-value="Project Manager: มองแผนงาน ทรัพยากร timeline ความคืบหน้า และเจ้าของงาน">Project Manager</button>
+              <button class="chip" type="button" data-value="Multilingual Interpreter: แปล สรุป และเทียบความหมายของเอกสารหลายภาษาอย่างระมัดระวัง">Multilingual</button>
+              <button class="chip" type="button" data-value="Financial Communication: เล่าเรื่องข้อมูล ทำให้งานซับซ้อนเข้าใจง่าย เหมาะกับผู้บริหารหรือ presentation">Financial Communication</button>
+              <button class="chip" type="button" data-value="Digital Assets & CBDC: มองความเสี่ยงและข้อกำกับที่เกี่ยวกับสินทรัพย์ดิจิทัล Stablecoin และ CBDC">Digital Assets</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- หมวด 2 -->
+        <div class="card">
+          <div class="card-head">
+            <h2>2. JD: หน้าที่หลัก</h2>
+            <p>เลือกได้หลายข้อ หรือพิมพ์เพิ่มเองด้านล่าง</p>
+          </div>
+          <div class="card-body">
+            <div class="chips" data-group="jd">
+              <button class="chip selected" type="button" data-value="ตอบคำถามข้ามฝ่ายจากข้อมูลที่มี">ตอบข้ามฝ่าย</button>
+              <button class="chip selected" type="button" data-value="รายงานเองไม่ต้องรอให้ถาม (Proactive)">รายงาน Proactive</button>
+              <button class="chip selected" type="button" data-value="ชี้ Escalate ตามตารางผู้รับผิดชอบเท่านั้น ห้ามเดาเอง">Escalate ตามตาราง</button>
+              <button class="chip selected" type="button" data-value="เทียบข้อมูลข้ามฝ่ายหา Gap/ความไม่ตรงกัน">หา Gap ข้ามฝ่าย</button>
+              <button class="chip" type="button" data-value="สรุปสถานะรวมทุกฝ่ายเป็นภาพเดียว">สรุปภาพรวมทุกฝ่าย</button>
+              <button class="chip" type="button" data-value="แจ้งเตือนเมื่อพบความผิดปกติของข้อมูล">แจ้งเตือนความผิดปกติ</button>
+            </div>
+            <label class="field" style="margin-top:14px;">เพิ่ม JD เอง <span style="font-weight:400;color:var(--muted)">(บรรทัดละ 1 ข้อ)</span>
+              <textarea id="jd_custom" placeholder="เช่น เตือนก่อนถึง Deadline ยื่นภาษี 7 วัน&#10;สรุปให้เจ้าของสำนักงานทุกเช้าวันจันทร์"></textarea>
+            </label>
+          </div>
+        </div>
+
+        <!-- หมวด 3 — Personality -->
+        <div class="card">
+          <div class="card-head">
+            <h2>3. Personality ⭐</h2>
+            <p>เลือก 1 แบบที่ตรงกับทีมของคุณที่สุด</p>
+          </div>
+          <div class="card-body">
+            <div class="personality-grid">
+
+              <button class="persona-card" type="button" data-persona="Advisor"
+                data-value="Advisor — รอให้ถาม ตอบนุ่มนวล: สนับสนุนทีมแบบ non-intrusive ตอบเมื่อถูกถามเท่านั้น ใช้ภาษาที่เป็นมิตร ไม่ตัดสิน และไม่ชี้นำโดยไม่ได้รับเชิญ">
+                <div class="persona-radio"></div>
+                <div class="persona-icon">🟢</div>
+                <div class="persona-name">Advisor</div>
+                <div class="persona-desc">รอให้ถาม ตอบนุ่มนวล<br>เหมาะกับทีมที่ชอบปรึกษากันเอง ไม่ชอบให้ AI ก้าวก่าย</div>
+              </button>
+
+              <button class="persona-card" type="button" data-persona="Analyst"
+                data-value="Analyst — ดึง Pattern เทียบข้อมูล พูดด้วยตัวเลข: วิเคราะห์เชิงข้อมูล เปรียบเทียบตัวเลข หา trend และ pattern จากข้อมูลข้ามฝ่าย รายงานเป็นตารางหรือ dashboard เสมอเมื่อทำได้">
+                <div class="persona-radio"></div>
+                <div class="persona-icon">🟡</div>
+                <div class="persona-name">Analyst</div>
+                <div class="persona-desc">ดึง Pattern เทียบข้อมูล พูดด้วยตัวเลข<br>เหมาะกับทีมที่เชื่อข้อมูลมากกว่าความเห็นส่วนตัว</div>
+              </button>
+
+              <button class="persona-card" type="button" data-persona="Investigator"
+                data-value="Investigator — ชี้ปัญหาตรงๆ ไม่รอให้ถาม: กล้าพูดสิ่งที่ทุกคนรู้แต่ไม่มีใครพูด ชี้ความเสี่ยงและ Gap ก่อนที่จะกลายเป็นปัญหา ใช้ Root Cause analysis เป็นหลัก">
+                <div class="persona-radio"></div>
+                <div class="persona-icon">🔴</div>
+                <div class="persona-name">Investigator</div>
+                <div class="persona-desc">ชี้ปัญหาตรงๆ ไม่รอให้ถาม<br>กล้าพูดสิ่งที่ทุกคนรู้แต่ไม่มีใครพูด</div>
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- หมวด 4 -->
+        <div class="card">
+          <div class="card-head">
+            <h2>4. รูปแบบคำตอบ</h2>
+            <p>ให้ AIKM ตอบออกมาเป็นรูปแบบที่ทีมใช้ต่อได้ทันที</p>
+          </div>
+          <div class="card-body" id="output-section">
+            <div class="chips" data-group="output">
+              <button class="chip" type="button" data-value="Checklist">Checklist</button>
+              <button class="chip" type="button" data-value="ตาราง">ตาราง</button>
+              <button class="chip" type="button" data-value="ขั้นตอนทีละข้อ">ขั้นตอน</button>
+              <button class="chip" type="button" data-value="ร่างอีเมล">ร่างอีเมล</button>
+              <button class="chip" type="button" data-value="ร่าง LINE">ร่าง LINE</button>
+              <button class="chip" type="button" data-value="FAQ">FAQ</button>
+              <button class="chip" type="button" data-value="สรุปบรรยายให้อ่านเข้าใจง่าย">สรุปบรรยาย</button>
+              <button class="chip" type="button" data-value="อธิบายแบบเด็ก 10 ขวบเข้าใจ">อธิบายเด็ก 10 ขวบ</button>
+              <button class="chip" type="button" data-value="กระชับ ตรงประเด็น ไม่เกิน 200 คำ">ไม่เกิน 200 คำ</button>
+              <button class="chip" type="button" data-value="หัวข้อสำคัญให้ใส่ภาษาไทยและวงเล็บภาษาอังกฤษ เช่น ความเสี่ยง (Risk)">ไทย + English key terms</button>
+              <button class="chip" type="button" data-value="สรุปแบบ Timeline เรียงตามเวลา วันที่ และเหตุการณ์สำคัญ">Timeline</button>
+              <button class="chip" type="button" data-value="สรุปแบบ Problem-Solution: ปัญหา → สาเหตุ → วิธีแก้">Problem-Solution</button>
+              <button class="chip" type="button" data-value="สรุปเป็น bullet points ที่เหมาะสำหรับทำ Mind Map">Mind Map bullets</button>
+              <!-- Analyst-only -->
+              <button class="chip analyst-only" type="button" data-value="Dashboard เชิงตัวเลข: รวบรวมข้อมูลข้ามฝ่ายแสดงเป็นตัวเลขเปรียบเทียบ">Dashboard เชิงตัวเลข ⭐</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- หมวด 5 -->
+        <div class="card">
+          <div class="card-head">
+            <h2>5. เขตแดนแบบ SoD</h2>
+            <p>แบ่งเขตให้ชัด: AIKM รู้ข้อมูลข้ามฝ่ายแต่ต้องมีขอบเขตที่ชัดเจน</p>
+          </div>
+          <div class="card-body">
+            <p class="hint"><strong>ควรรู้ / Access</strong></p>
+            <div class="chips green" data-group="access">
+              <button class="chip selected" type="button" data-value="ข้อมูลจากทุก NB ฝ่าย (สรุปแล้ว)">NB ทุกฝ่าย</button>
+              <button class="chip selected" type="button" data-value="TM-ORG-001 / TM-POL-001">TM-ORG / TM-POL</button>
+              <button class="chip selected" type="button" data-value="Checklist/SOP ทุกฝ่าย">Checklist/SOP ทุกฝ่าย</button>
+              <button class="chip" type="button" data-value="ตัวเลขยอดขายรายลูกค้า">ยอดขายรายลูกค้า</button>
+            </div>
+
+            <p class="hint" style="margin-top:16px;"><strong>ห้ามรู้ / Restricted</strong></p>
+            <div class="chips red" data-group="restricted">
+              <button class="chip selected" type="button" data-value="รหัสผ่าน API key หรือข้อมูล login">รหัสผ่าน/API key</button>
+              <button class="chip selected" type="button" data-value="ข้อมูลส่วนบุคคลพนักงาน">ข้อมูลส่วนบุคคล</button>
+              <button class="chip selected" type="button" data-value="เงินเดือน/ข้อมูล HR รายบุคคล">เงินเดือน/HR</button>
+              <button class="chip selected" type="button" data-value="สิทธิ์อนุมัติแทนผู้จัดการ — AIKM ต้อง Escalate เท่านั้น">สิทธิ์อนุมัติแทนผู้จัดการ</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- หมวด 6 -->
+        <div class="card">
+          <div class="card-head">
+            <h2>6. Human Checkpoint</h2>
+            <p>เรื่องไหนต้องให้คนตรวจ ก่อน AIKM รายงานออกไป</p>
+          </div>
+          <div class="card-body yellow">
+            <div class="chips" data-group="human">
+              <button class="chip selected" type="button" data-value="ก่อน Escalate ถึงผู้จัดการ">ก่อน Escalate ผู้จัดการ</button>
+              <button class="chip selected" type="button" data-value="ก่อนสรุปว่า 'ระบบขาด' ตรงไหน">ก่อนสรุปว่าระบบขาด</button>
+              <button class="chip" type="button" data-value="ก่อนตอบเรื่องที่มีความเสี่ยงสูง">ก่อนตอบเรื่องเสี่ยงสูง</button>
+              <button class="chip" type="button" data-value="ก่อนแจ้งเตือนข้ามฝ่าย">ก่อนแจ้งเตือนข้ามฝ่าย</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- หมวด 7 -->
+        <div class="card">
+          <div class="card-head">
+            <h2>7. คำถามสัมภาษณ์ AIKM</h2>
+            <p>ใช้ถามหลังตั้งค่า เพื่อทดสอบว่า AIKM พร้อมทำงานไหม</p>
+          </div>
+          <div class="card-body">
+            <div class="grid-2">
+              <label class="field">ถามจากแฟ้ม
+                <input id="q1" type="text" value="เอบีซี การ์เม้นท์ ช้าไปกี่วัน ใครควรรู้ก่อน?">
+              </label>
+              <label class="field">ถามแบบ checklist
+                <input id="q2" type="text" value="กรีนฟาร์ม ออร์แกนิค ตอนนี้ค้างอยู่ที่ใคร?">
+              </label>
+              <label class="field">คำถามที่ควรตอบว่าไม่รู้
+                <input id="q3" type="text" value="ดอยคำ คอฟฟี่ สาขาไหนขายดีสุด">
+              </label>
+              <label class="field">คำถามที่ต้องส่งให้คนตรวจก่อน
+                <input id="q4" type="text" value="อนุมัติวงเงินเกิน 100,000 ให้ไปได้ไหม">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- หมวด 8 — Conditional Skill -->
+        <div id="section8" class="card skill-card-wrap">
+          <div class="card-head">
+            <h2>8. Skill เสริม 🆕</h2>
+            <p>เลือกได้ 1 อัน ตามบุคลิกที่เลือกไว้ในหมวด 3</p>
+          </div>
+          <div class="card-body">
+
+            <!-- Analyst: Cross Dept Dashboard -->
+            <div id="skill-analyst" class="skill-card analyst-skill" style="display:none;">
+              <div class="skill-card-title">🟡 Cross Dept Dashboard (H5-S4)</div>
+              <div class="skill-card-desc">
+                รวบรวมข้อมูลจากฝ่ายขาย+จัดซื้อผ่าน Template มาตรฐาน สร้าง HTML Dashboard แสดงยอดขาย/ค่าใช้จ่ายข้ามฝ่าย เหมาะกับ Analyst ที่ต้องการเห็นภาพรวมเป็นตัวเลขในทันที
+              </div>
+              <label class="skill-toggle">
+                <input type="checkbox" id="skill_analyst_check" onchange="buildPrompt()">
+                เพิ่ม Skill นี้เข้า AIKM
+              </label>
+            </div>
+
+            <!-- Advisor: Business Coach -->
+            <div id="skill-advisor" class="skill-card advisor-skill" style="display:none;">
+              <div class="skill-card-title">🟢 Business Coach (H7-S3)</div>
+              <div class="skill-card-desc">
+                ให้คำปรึกษาแบบโค้ช ถามก่อนแนะนำ ไม่บังคับทิศทาง เสนอทางเลือก 3 ระดับ (ทำได้เลย / วางแผน / ระยะยาว) เหมาะกับ Advisor ที่ต้องการชี้แนะโดยไม่ก้าวก่าย
+              </div>
+              <label class="skill-toggle">
+                <input type="checkbox" id="skill_advisor_check" onchange="buildPrompt()">
+                เพิ่ม Skill นี้เข้า AIKM
+              </label>
+            </div>
+
+            <!-- Investigator: Problem Analyzer -->
+            <div id="skill-investigator" class="skill-card investigator-skill" style="display:none;">
+              <div class="skill-card-title">🔴 Problem Analyzer (H7-S1)</div>
+              <div class="skill-card-desc">
+                วิเคราะห์ปัญหาด้วย Root Cause (5 Whys) พร้อมแนวทางแก้ 3 ระดับ เพิ่มเติม: SWOT, Business Model Canvas เหมาะกับ Investigator ที่ต้องการเจาะลึกต้นตอของปัญหาข้ามฝ่าย
+              </div>
+              <label class="skill-toggle">
+                <input type="checkbox" id="skill_investigator_check" onchange="buildPrompt()">
+                เพิ่ม Skill นี้เข้า AIKM
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right panel -->
+      <aside class="stack sticky">
+        <div class="card">
+          <div class="card-head">
+            <h2>Guideline — AIKM</h2>
+            <p>จุดที่ต้องจำตอนสร้าง AI Knowledge Manager</p>
+          </div>
+          <div class="card-body">
+            <ul class="guide-list">
+              <li><strong>JD</strong><br>รู้ทุกฝ่าย วิเคราะห์ข้ามฝ่าย Escalate ตามตาราง ไม่เดาเอง</li>
+              <li><strong>Personality</strong><br>เลือก 1 ใน 3 — Advisor / Analyst / Investigator — กำหนดน้ำเสียงและวิธีรายงาน</li>
+              <li><strong>Access</strong><br>รู้ข้อมูลข้ามฝ่ายเท่าที่จำเป็นต่อการวิเคราะห์และ Escalate</li>
+              <li><strong>Restricted</strong><br>ข้อมูลส่วนบุคคล เงินเดือน รหัสผ่าน และ <strong>ห้ามตัดสินใจแทนผู้จัดการเด็ดขาด</strong></li>
+              <li><strong>Human Checkpoint</strong><br>ก่อน Escalate และก่อนสรุปว่าระบบขาดตรงไหน ต้องให้คนยืนยัน</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>Prompt พร้อม Copy</h2>
+            <p>คัดลอกไปแปะใน Instruction ของ AI Chat</p>
+          </div>
+          <div class="card-body">
+            <textarea id="output" class="output" readonly></textarea>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const status = $("status");
+
+    const SKILL_CONTENT = {
+      analyst: `## OPTIONAL SKILL: Cross Dept Dashboard (H5-S4)
+คุณมีความสามารถพิเศษในการสร้าง Dashboard ข้ามฝ่าย:
+- รวบรวมข้อมูลจากฝ่ายขายและฝ่ายจัดซื้อผ่าน Template มาตรฐาน
+- สร้าง HTML Dashboard แสดงยอดขาย/ค่าใช้จ่ายข้ามฝ่ายเปรียบเทียบได้ทันที
+- ชี้ Gap ระหว่างยอดสั่งซื้อ vs ยอดขายได้อัตโนมัติ
+- แสดงผลเป็นตารางหรือ HTML สำหรับแปะใน Notion / Line / อีเมล`,
+
+      investigator: `## OPTIONAL SKILL: Problem Analyzer (H7-S1)
+คุณมีความสามารถพิเศษในการวิเคราะห์ปัญหาเชิงลึก:
+- ใช้ 5 Whys หา Root Cause ของปัญหาข้ามฝ่าย
+- เสนอแนวทางแก้ 3 ระดับ: แก้ทันที / แก้ระยะกลาง / ป้องกันระยะยาว
+- เพิ่มเติม: SWOT และ Business Model Canvas เมื่อจำเป็น
+- ชี้ความเสี่ยงที่ซ่อนอยู่ก่อนที่จะกลายเป็นวิกฤต`,
+
+      advisor: `## OPTIONAL SKILL: Business Coach (H7-S3)
+คุณมีความสามารถพิเศษในการให้คำปรึกษาแบบโค้ช:
+- ถามก่อนแนะนำ ไม่บังคับทิศทาง ไม่ก้าวก่ายการตัดสินใจของทีม
+- เสนอทางเลือก 3 ระดับ: ทำได้เลย / ต้องวางแผน / ระยะยาว
+- โทนนุ่มนวล ตั้งคำถามให้ทีมคิดเอง มากกว่าสั่งว่าควรทำอะไร
+- ใช้กรอบ Business Model Canvas และ SWOT เมื่อทีมต้องการมองภาพใหญ่`
+    };
+
+    let selectedPersona = null;
+
+    document.querySelectorAll(".persona-card").forEach((card) => {
+      card.addEventListener("click", () => {
+        document.querySelectorAll(".persona-card").forEach((c) => c.classList.remove("selected"));
+        card.classList.add("selected");
+        selectedPersona = card.dataset.persona;
+        updatePersonaUI();
+        buildPrompt();
+      });
+    });
+
+    function updatePersonaUI() {
+      const sec8 = $("section8");
+      const analystCard = $("skill-analyst");
+      const investigatorCard = $("skill-investigator");
+      const advisorCard = $("skill-advisor");
+      const outputSection = $("output-section");
+
+      if (selectedPersona === "Analyst") {
+        sec8.classList.add("visible");
+        analystCard.style.display = "block";
+        investigatorCard.style.display = "none";
+        advisorCard.style.display = "none";
+        outputSection.classList.add("analyst-mode");
+      } else if (selectedPersona === "Investigator") {
+        sec8.classList.add("visible");
+        analystCard.style.display = "none";
+        investigatorCard.style.display = "block";
+        advisorCard.style.display = "none";
+        outputSection.classList.remove("analyst-mode");
+      } else if (selectedPersona === "Advisor") {
+        sec8.classList.add("visible");
+        analystCard.style.display = "none";
+        investigatorCard.style.display = "none";
+        advisorCard.style.display = "block";
+        outputSection.classList.remove("analyst-mode");
+      } else {
+        sec8.classList.remove("visible");
+        analystCard.style.display = "none";
+        investigatorCard.style.display = "none";
+        advisorCard.style.display = "none";
+        outputSection.classList.remove("analyst-mode");
+      }
+    }
+
+    function groupValues(group) {
+      return [...document.querySelectorAll(`[data-group="${group}"] .selected`)].map((b) => b.dataset.value);
+    }
+
+    function cleanLines(text) {
+      return text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+    }
+
+    function bullets(items) {
+      return items.length ? items.map((i) => `- ${i}`).join("\n") : "-";
+    }
+
+    function buildPrompt() {
+      const name = $("name").value.trim() || "[ชื่อ AI]";
+      const allJD = [...groupValues("jd"), ...cleanLines($("jd_custom").value)];
+      const personaCard = document.querySelector(".persona-card.selected");
+      const personaText = personaCard ? personaCard.dataset.value : "[ยังไม่ได้เลือก Personality]";
+
+      let optionalSkill = "";
+      if (selectedPersona === "Analyst" && $("skill_analyst_check").checked) {
+        optionalSkill = "\n\n" + SKILL_CONTENT.analyst;
+      } else if (selectedPersona === "Investigator" && $("skill_investigator_check").checked) {
+        optionalSkill = "\n\n" + SKILL_CONTENT.investigator;
+      } else if (selectedPersona === "Advisor" && $("skill_advisor_check").checked) {
+        optionalSkill = "\n\n" + SKILL_CONTENT.advisor;
+      }
+
+      const prompt = `# AIKM Card: ${name} (AI Knowledge Manager)
+
+## IDENTITY
+คุณคือ ${name} ตำแหน่ง AI Knowledge Manager (AIKM) — รู้ทุกฝ่ายในองค์กร
+
+## SOURCES: แฟ้ม/ข้อมูลที่ใช้
+${bullets(cleanLines($("sources").value))}
+
+## SPECIALIST LENS: มุมมองผู้เชี่ยวชาญเสริม
+${bullets(groupValues("perspective"))}
+
+## JD: หน้าที่หลัก
+${bullets(allJD)}
+
+## PERSONALITY
+${personaText}
+
+## OUTPUT FORMAT
+${bullets(groupValues("output"))}
+
+## ACCESS (ควรรู้)
+${bullets(groupValues("access"))}
+
+## RESTRICTED (ห้ามรู้/ห้ามตอบ)
+${bullets(groupValues("restricted"))}
+⚠️ ห้ามตัดสินใจแทนผู้จัดการ ห้ามอนุมัติแทนใคร ต้อง Escalate ตามตารางผู้รับผิดชอบเท่านั้น
+
+ถ้าถูกถามเรื่อง Restricted ให้ตอบว่า:
+"ข้อมูลนี้อยู่นอกขอบเขต AIKM กรุณาตรวจสอบกับผู้จัดการก่อนใช้งาน"
+
+## HUMAN CHECKPOINT
+${bullets(groupValues("human"))}${optionalSkill}
+
+## INTERVIEW / AUDIT TEST
+1. ถามจากแฟ้ม: ${$("q1").value.trim() || "-"}
+2. ถามแบบ checklist: ${$("q2").value.trim() || "-"}
+3. คำถามที่ควรตอบว่าไม่รู้: ${$("q3").value.trim() || "-"}
+4. คำถามที่ต้องส่งให้คนตรวจ: ${$("q4").value.trim() || "-"}
+`;
+      $("output").value = prompt;
+      return prompt;
+    }
+
+    function setStatus(text) {
+      status.textContent = text;
+      clearTimeout(window.__timer);
+      window.__timer = setTimeout(() => status.textContent = "", 2400);
+    }
+
+    const sourcePresets = {
+      org: `TM-ORG-001 ตารางผู้รับผิดชอบ\n- ฝ่ายขาย: นำโดยหัวหน้าฝ่ายขาย รับผิดชอบ SO/Invoice\n- ฝ่ายจัดซื้อ: นำโดยหัวหน้าจัดซื้อ รับผิดชอบ PO/GR\n- ฝ่ายบัญชี: นำโดยหัวหน้าบัญชี รับผิดชอบ AP/AR/GL`,
+      pol: `TM-POL-001 นโยบายและ SOP ระหว่างฝ่าย\n- วงเงินอนุมัติ PO < 50,000: หัวหน้าจัดซื้อ\n- วงเงิน 50,001-200,000: ผู้จัดการทั่วไป\n- วงเงิน > 200,000: กรรมการบริษัท\n- กำหนดส่งเอกสารภาษีรายเดือน: วันที่ 10`,
+      nb: `สรุปข้อมูลจาก NB ฝ่ายขาย/จัดซื้อ/บัญชี\n[ฝ่ายขาย] ลูกค้าหลัก 3 ราย: ABC, กรีนฟาร์ม, ดอยคำ\n[ฝ่ายจัดซื้อ] Vendor หลัก 5 ราย อนุมัติแล้ว\n[ฝ่ายบัญชี] รอบปิดบัญชีทุกวันที่ 25 ของเดือน`
+    };
+
+    document.querySelectorAll("[data-preset]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const key = button.dataset.preset;
+        if (sourcePresets[key]) {
+          $("sources").value = sourcePresets[key];
+          buildPrompt();
+          setStatus("เติมตัวอย่างแล้ว");
+        }
+      });
+    });
+
+    document.querySelectorAll(".chip").forEach((button) => {
+      button.addEventListener("click", () => {
+        button.classList.toggle("selected");
+        buildPrompt();
+      });
+    });
+
+    document.querySelectorAll("input, textarea").forEach((input) => {
+      if (input.type !== "checkbox") {
+        input.addEventListener("input", buildPrompt);
+        input.addEventListener("change", buildPrompt);
+      }
+    });
+
+    $("build").addEventListener("click", () => {
+      buildPrompt();
+      setStatus("สร้าง Prompt แล้ว");
+    });
+
+    $("copy").addEventListener("click", async () => {
+      const prompt = buildPrompt();
+      try {
+        await navigator.clipboard.writeText(prompt);
+        setStatus("Copy แล้ว พร้อมแปะใน Instruction");
+      } catch (e) {
+        $("output").select();
+        document.execCommand("copy");
+        setStatus("Copy แล้ว");
+      }
+    });
+
+    $("clear").addEventListener("click", () => {
+      if (!confirm("ล้างข้อมูลทั้งหมด?")) return;
+      document.querySelectorAll(".persona-card").forEach((c) => c.classList.remove("selected"));
+      selectedPersona = null;
+      updatePersonaUI();
+      document.querySelectorAll(".chip").forEach((b) => b.classList.remove("selected"));
+      document.querySelectorAll("input[type='checkbox']").forEach((c) => c.checked = false);
+      document.querySelectorAll("input[type='text']").forEach((i) => i.value = "");
+      document.querySelectorAll("textarea").forEach((t) => t.value = "");
+      $("sources").value = "TM-ORG-001 ตารางผู้รับผิดชอบ\nTM-POL-001 นโยบายและ SOP ระหว่างฝ่าย\nสรุปข้อมูลจาก NB ฝ่ายขาย/จัดซื้อ/บัญชี";
+      buildPrompt();
+      setStatus("ล้างฟอร์มแล้ว");
+    });
+
+    buildPrompt();
+  </script>
+</body>
+</html>
