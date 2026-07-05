@@ -67,12 +67,25 @@
             <div style="flex:1;background:#fff;border-radius:13px;padding:16px;text-align:center"><div style="font-size:38px;font-weight:800;color:#5B1A8B;line-height:1">9</div><div style="font-size:13px;color:#8a7d99;margin-top:3px">หมวด</div></div>
             <div style="flex:1;background:#fff;border-radius:13px;padding:16px;text-align:center"><div style="font-size:38px;font-weight:800;color:#C040C0;line-height:1">30</div><div style="font-size:13px;color:#8a7d99;margin-top:3px">สกิล</div></div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="display:flex;flex-direction:column;gap:5px">
             <sc-for list="{{ catList }}" as="c" hint-placeholder-count="9">
-              <div onClick="{{ c.onScrollTo }}" style="display:flex;align-items:center;gap:10px;background:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;transition:background .15s" style-hover="background:#f3ecfb">
-                <span style="width:22px;height:22px;border-radius:6px;background:#5B1A8B;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">{{ c.n }}</span>
-                <span style="font-size:13.5px;font-weight:600;color:#3a2a48;flex:1">{{ c.title }}</span>
-                <span style="font-size:12px;color:#a99bb8">{{ c.count }}</span>
+              <div style="background:#fff;border-radius:9px;overflow:hidden">
+                <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;">
+                  <span style="width:22px;height:22px;border-radius:6px;background:#5B1A8B;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">{{ c.n }}</span>
+                  <span onClick="{{ c.onScrollTo }}" style="font-size:13.5px;font-weight:600;color:#3a2a48;flex:1;cursor:pointer;" style-hover="color:#5B1A8B">{{ c.title }}</span>
+                  <span style="font-size:12px;color:#a99bb8;margin-right:4px">{{ c.count }}</span>
+                  <span onClick="{{ c.onToggleToc }}" style="font-size:13px;color:#8B2FC9;cursor:pointer;padding:0 2px;user-select:none;">{{ c.arrow }}</span>
+                </div>
+                <sc-if value="{{ c.tocOpen }}">
+                  <div style="padding:0 12px 10px 44px;display:flex;flex-direction:column;gap:4px;">
+                    <sc-for list="{{ c.skills }}" as="sk" hint-placeholder-count="3">
+                      <div style="font-size:12px;color:#5a4a6a;display:flex;gap:6px;align-items:baseline;">
+                        <span style="color:#C040C0;font-weight:700;flex-shrink:0;">{{ sk.code }}</span>
+                        <span>{{ sk.name }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
               </div>
             </sc-for>
           </div>
@@ -209,7 +222,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;heroStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;gradient&quot;,&quot;split&quot;,&quot;minimal&quot;],&quot;default&quot;:&quot;split&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;รูปแบบดีไซน์&quot;},&quot;cardStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;accent&quot;,&quot;clean&quot;],&quot;default&quot;:&quot;accent&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;รูปแบบดีไซน์&quot;}}">
 class Component extends DCLogic {
-  state = { data: null, q: '', open: {}, md: {}, copied: null };
+  state = { data: null, q: '', open: {}, md: {}, copied: null, tocOpen: {} };
 
   componentDidMount() {
     const grab = () => {
@@ -233,6 +246,7 @@ class Component extends DCLogic {
   };
 
   toggleCat = (n) => this.setState(s => ({ open: { ...s.open, [n]: !s.open[n] } }));
+  toggleToc = (n) => this.setState(s => ({ tocOpen: { ...s.tocOpen, [n]: !s.tocOpen[n] } }));
   toggleMd = (code) => this.setState(s => ({ md: { ...s.md, [code]: !s.md[code] } }));
   onSearch = (e) => this.setState({ q: e.target.value });
 
@@ -265,7 +279,17 @@ class Component extends DCLogic {
     const data = this.state.data;
     const q = (this.state.q || '').trim().toLowerCase();
 
-    const catList = (data || []).map(c => ({ n: c.n, title: c.title, count: c.skills.length, onScrollTo: () => this.scrollToCat(c.n) }));
+    const catList = (data || []).map(c => {
+      const tocOpen = !!this.state.tocOpen[c.n];
+      return {
+        n: c.n, title: c.title, count: c.skills.length,
+        tocOpen,
+        arrow: tocOpen ? '▾' : '▸',
+        onToggleToc: () => this.toggleToc(c.n),
+        onScrollTo: () => this.scrollToCat(c.n),
+        skills: c.skills.map(sk => ({ code: sk.code, name: sk.name })),
+      };
+    });
 
     const cats = (data || []).map(c => {
       let skills = c.skills;
