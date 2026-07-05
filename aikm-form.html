@@ -459,28 +459,12 @@
               </label>
             </div>
             <label class="field" style="margin-top:12px;">แฟ้ม/ข้อมูลที่จะให้ AIKM
-              <textarea id="sources">TM-ORG-001 ตารางผู้รับผิดชอบ
-TM-POL-001 นโยบายและ SOP ระหว่างฝ่าย
-สรุปข้อมูลจาก NB ฝ่ายขาย/จัดซื้อ/บัญชี</textarea>
+              <textarea id="sources">TM-ORG-001_ตารางผู้รับผิดชอบ.docx
+TM-POL-001_นโยบายและSOP_ระหว่างฝ่าย.docx
+สถานะงาน_ฝ่ายขาย_2569-07.xlsx
+สถานะงาน_ฝ่ายจัดซื้อ_2569-07.xlsx
+สถานะงาน_ฝ่ายบัญชี_2569-07.xlsx</textarea>
             </label>
-            <div class="preset-row">
-              <button class="preset" type="button" data-preset="org">ตัวอย่าง TM-ORG-001</button>
-              <button class="preset" type="button" data-preset="pol">ตัวอย่าง TM-POL-001</button>
-              <button class="preset" type="button" data-preset="nb">ตัวอย่างสรุป NB ฝ่าย</button>
-            </div>
-            <p class="hint" style="margin-top:16px;"><strong>มุมมองผู้เชี่ยวชาญเสริม</strong> เลือก 0-2 ข้อ</p>
-            <div class="chips" data-group="perspective">
-              <button class="chip" type="button" data-value="Compliance & Regulation: วิเคราะห์ข้อกำหนด มาตรฐาน และความเสี่ยงด้านกฎระเบียบ">Compliance</button>
-              <button class="chip" type="button" data-value="Financial Risk: ประเมินความเสี่ยงด้านเครดิต สภาพคล่อง ปฏิบัติการ และผลกระทบทางการเงิน">Financial Risk</button>
-              <button class="chip" type="button" data-value="Legal Lens: ตีความข้อกฎหมาย สัญญา และประเด็นที่ต้องให้ผู้เชี่ยวชาญตรวจ">Legal</button>
-              <button class="chip" type="button" data-value="IFRS/TFRS Expert: มองผลกระทบต่อมาตรฐานบัญชี การเปิดเผยข้อมูล และการตรวจสอบได้">IFRS/TFRS</button>
-              <button class="chip" type="button" data-value="Process Architect: มองงานเป็น flowchart ขั้นตอน ระบบ และจุดส่งต่อ">Process</button>
-              <button class="chip" type="button" data-value="Document Editor: จัดโครงสร้างภาษา เอกสาร รายงาน และความสอดคล้องของคำศัพท์">Document Editor</button>
-              <button class="chip" type="button" data-value="Project Manager: มองแผนงาน ทรัพยากร timeline ความคืบหน้า และเจ้าของงาน">Project Manager</button>
-              <button class="chip" type="button" data-value="Multilingual Interpreter: แปล สรุป และเทียบความหมายของเอกสารหลายภาษาอย่างระมัดระวัง">Multilingual</button>
-              <button class="chip" type="button" data-value="Financial Communication: เล่าเรื่องข้อมูล ทำให้งานซับซ้อนเข้าใจง่าย เหมาะกับผู้บริหารหรือ presentation">Financial Communication</button>
-              <button class="chip" type="button" data-value="Digital Assets & CBDC: มองความเสี่ยงและข้อกำกับที่เกี่ยวกับสินทรัพย์ดิจิทัล Stablecoin และ CBDC">Digital Assets</button>
-            </div>
           </div>
         </div>
 
@@ -598,52 +582,48 @@ TM-POL-001 นโยบายและ SOP ระหว่างฝ่าย
         <div class="card">
           <div class="card-head">
             <h2>6. Human Checkpoint</h2>
-            <p>เรื่องไหนต้องให้คนตรวจ ก่อน AIKM รายงานออกไป</p>
+            <p>เรื่องไหนต้องให้คนตรวจ ก่อน AIKM รายงานออกไป — เลือกด้วยว่าต้องตรวจระดับไหน</p>
           </div>
           <div class="card-body yellow">
+            <p class="hint"><strong>เรื่องที่ต้องตรวจ</strong></p>
             <div class="chips" data-group="human">
               <button class="chip selected" type="button" data-value="ก่อน Escalate ถึงผู้จัดการ">ก่อน Escalate ผู้จัดการ</button>
-              <button class="chip selected" type="button" data-value="ก่อนสรุปว่า 'ระบบขาด' ตรงไหน">ก่อนสรุปว่าระบบขาด</button>
+              <button class="chip selected" type="button" data-value="ก่อนสรุปว่าระบบขาดตรงไหน">ก่อนสรุปว่าระบบขาด</button>
               <button class="chip" type="button" data-value="ก่อนตอบเรื่องที่มีความเสี่ยงสูง">ก่อนตอบเรื่องเสี่ยงสูง</button>
               <button class="chip" type="button" data-value="ก่อนแจ้งเตือนข้ามฝ่าย">ก่อนแจ้งเตือนข้ามฝ่าย</button>
             </div>
-          </div>
-        </div>
-
-        <!-- หมวด 7 -->
-        <div class="card">
-          <div class="card-head">
-            <h2>7. คำถามสัมภาษณ์ AIKM</h2>
-            <p>ใช้ถามหลังตั้งค่า เพื่อทดสอบว่า AIKM พร้อมทำงานไหม</p>
-          </div>
-          <div class="card-body">
-            <div class="grid-2">
-              <label class="field">ถามจากแฟ้ม
-                <input id="q1" type="text" value="เอบีซี การ์เม้นท์ ช้าไปกี่วัน ใครควรรู้ก่อน?">
-              </label>
-              <label class="field">ถามแบบ checklist
-                <input id="q2" type="text" value="กรีนฟาร์ม ออร์แกนิค ตอนนี้ค้างอยู่ที่ใคร?">
-              </label>
-              <label class="field">คำถามที่ควรตอบว่าไม่รู้
-                <input id="q3" type="text" value="ดอยคำ คอฟฟี่ สาขาไหนขายดีสุด">
-              </label>
-              <label class="field">คำถามที่ต้องส่งให้คนตรวจก่อน
-                <input id="q4" type="text" value="อนุมัติวงเงินเกิน 100,000 ให้ไปได้ไหม">
-              </label>
+            <p class="hint" style="margin-top:16px;"><strong>ระดับการตรวจ</strong> เลือก 1 ระดับ</p>
+            <div class="chips" data-group="checklevel" data-single="true">
+              <button class="chip" type="button" data-value="🟢 ระดับเบา: ดูผ่านๆ แก้ถ้าพบผิดชัดเจน">🟢 เบา (ดูผ่านๆ)</button>
+              <button class="chip selected" type="button" data-value="🟡 ระดับกลาง: อ่านละเอียดทุกบรรทัด ยืนยันก่อนส่ง">🟡 กลาง (อ่านละเอียด)</button>
+              <button class="chip" type="button" data-value="🔴 ระดับเข้ม: ผู้เชี่ยวชาญต้องตรวจก่อนนำไปใช้จริง">🔴 เข้ม (ผู้เชี่ยวชาญตรวจ)</button>
             </div>
           </div>
         </div>
 
-        <!-- หมวด 8 — Conditional Skill -->
-        <div id="section8" class="card skill-card-wrap">
+
+        <!-- หมวด 8 — Skill เสริม (แสดงเสมอ) -->
+        <div id="section8" class="card">
           <div class="card-head">
             <h2>8. Skill เสริม 🆕</h2>
-            <p>เลือกได้ 1 อัน ตามบุคลิกที่เลือกไว้ในหมวด 3</p>
+            <p>เลือกได้ 1 อัน — ติ๊กถูก default ตามบุคลิกที่เลือก สามารถเปลี่ยนได้</p>
           </div>
-          <div class="card-body">
+          <div class="card-body" style="display:grid;gap:14px;">
+
+            <!-- Advisor: Business Coach -->
+            <div id="skill-advisor" class="skill-card" style="border-color:#22c55e;background:#f0fdf4;">
+              <div class="skill-card-title" style="color:#15803d;">🟢 Business Coach (H7-S3)</div>
+              <div class="skill-card-desc">
+                ให้คำปรึกษาแบบโค้ช ถามก่อนแนะนำ ไม่บังคับทิศทาง เสนอทางเลือก 3 ระดับ (ทำได้เลย / วางแผน / ระยะยาว) เหมาะกับ Advisor ที่ต้องการชี้แนะโดยไม่ก้าวก่าย
+              </div>
+              <label class="skill-toggle">
+                <input type="checkbox" id="skill_advisor_check" onchange="buildPrompt()">
+                เพิ่ม Skill นี้เข้า AIKM
+              </label>
+            </div>
 
             <!-- Analyst: Cross Dept Dashboard -->
-            <div id="skill-analyst" class="skill-card analyst-skill" style="display:none;">
+            <div id="skill-analyst" class="skill-card analyst-skill">
               <div class="skill-card-title">🟡 Cross Dept Dashboard (H5-S4)</div>
               <div class="skill-card-desc">
                 รวบรวมข้อมูลจากฝ่ายขาย+จัดซื้อผ่าน Template มาตรฐาน สร้าง HTML Dashboard แสดงยอดขาย/ค่าใช้จ่ายข้ามฝ่าย เหมาะกับ Analyst ที่ต้องการเห็นภาพรวมเป็นตัวเลขในทันที
@@ -654,20 +634,8 @@ TM-POL-001 นโยบายและ SOP ระหว่างฝ่าย
               </label>
             </div>
 
-            <!-- Advisor: Business Coach -->
-            <div id="skill-advisor" class="skill-card advisor-skill" style="display:none;">
-              <div class="skill-card-title">🟢 Business Coach (H7-S3)</div>
-              <div class="skill-card-desc">
-                ให้คำปรึกษาแบบโค้ช ถามก่อนแนะนำ ไม่บังคับทิศทาง เสนอทางเลือก 3 ระดับ (ทำได้เลย / วางแผน / ระยะยาว) เหมาะกับ Advisor ที่ต้องการชี้แนะโดยไม่ก้าวก่าย
-              </div>
-              <label class="skill-toggle">
-                <input type="checkbox" id="skill_advisor_check" onchange="buildPrompt()">
-                เพิ่ม Skill นี้เข้า AIKM
-              </label>
-            </div>
-
             <!-- Investigator: Problem Analyzer -->
-            <div id="skill-investigator" class="skill-card investigator-skill" style="display:none;">
+            <div id="skill-investigator" class="skill-card investigator-skill">
               <div class="skill-card-title">🔴 Problem Analyzer (H7-S1)</div>
               <div class="skill-card-desc">
                 วิเคราะห์ปัญหาด้วย Root Cause (5 Whys) พร้อมแนวทางแก้ 3 ระดับ เพิ่มเติม: SWOT, Business Model Canvas เหมาะกับ Investigator ที่ต้องการเจาะลึกต้นตอของปัญหาข้ามฝ่าย
@@ -707,6 +675,10 @@ TM-POL-001 นโยบายและ SOP ระหว่างฝ่าย
             <p>คัดลอกไปแปะใน Instruction ของ AI Chat</p>
           </div>
           <div class="card-body">
+            <button id="copy-output" type="button" style="width:100%;margin-bottom:10px;min-height:44px;border:0;border-radius:8px;padding:10px 14px;background:#2b0877;color:#fff;font:900 16px 'Prompt',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;" onmouseover="this.style.background='#4a0fa8'" onmouseout="this.style.background='#2b0877'">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Markdown Prompt
+            </button>
             <textarea id="output" class="output" readonly></textarea>
           </div>
         </div>
@@ -754,35 +726,23 @@ TM-POL-001 นโยบายและ SOP ระหว่างฝ่าย
     });
 
     function updatePersonaUI() {
-      const sec8 = $("section8");
-      const analystCard = $("skill-analyst");
-      const investigatorCard = $("skill-investigator");
-      const advisorCard = $("skill-advisor");
       const outputSection = $("output-section");
-
       if (selectedPersona === "Analyst") {
-        sec8.classList.add("visible");
-        analystCard.style.display = "block";
-        investigatorCard.style.display = "none";
-        advisorCard.style.display = "none";
         outputSection.classList.add("analyst-mode");
+        $("skill_analyst_check").checked = true;
+        $("skill_advisor_check").checked = false;
+        $("skill_investigator_check").checked = false;
       } else if (selectedPersona === "Investigator") {
-        sec8.classList.add("visible");
-        analystCard.style.display = "none";
-        investigatorCard.style.display = "block";
-        advisorCard.style.display = "none";
         outputSection.classList.remove("analyst-mode");
+        $("skill_investigator_check").checked = true;
+        $("skill_analyst_check").checked = false;
+        $("skill_advisor_check").checked = false;
       } else if (selectedPersona === "Advisor") {
-        sec8.classList.add("visible");
-        analystCard.style.display = "none";
-        investigatorCard.style.display = "none";
-        advisorCard.style.display = "block";
         outputSection.classList.remove("analyst-mode");
+        $("skill_advisor_check").checked = true;
+        $("skill_analyst_check").checked = false;
+        $("skill_investigator_check").checked = false;
       } else {
-        sec8.classList.remove("visible");
-        analystCard.style.display = "none";
-        investigatorCard.style.display = "none";
-        advisorCard.style.display = "none";
         outputSection.classList.remove("analyst-mode");
       }
     }
@@ -804,15 +764,12 @@ TM-POL-001 นโยบายและ SOP ระหว่างฝ่าย
       const allJD = [...groupValues("jd"), ...cleanLines($("jd_custom").value)];
       const personaCard = document.querySelector(".persona-card.selected");
       const personaText = personaCard ? personaCard.dataset.value : "[ยังไม่ได้เลือก Personality]";
+      const checkLevel = groupValues("checklevel")[0] || "🟡 ระดับกลาง: อ่านละเอียดทุกบรรทัด ยืนยันก่อนส่ง";
 
       let optionalSkill = "";
-      if (selectedPersona === "Analyst" && $("skill_analyst_check").checked) {
-        optionalSkill = "\n\n" + SKILL_CONTENT.analyst;
-      } else if (selectedPersona === "Investigator" && $("skill_investigator_check").checked) {
-        optionalSkill = "\n\n" + SKILL_CONTENT.investigator;
-      } else if (selectedPersona === "Advisor" && $("skill_advisor_check").checked) {
-        optionalSkill = "\n\n" + SKILL_CONTENT.advisor;
-      }
+      if ($("skill_analyst_check").checked) optionalSkill = "\n\n" + SKILL_CONTENT.analyst;
+      else if ($("skill_investigator_check").checked) optionalSkill = "\n\n" + SKILL_CONTENT.investigator;
+      else if ($("skill_advisor_check").checked) optionalSkill = "\n\n" + SKILL_CONTENT.advisor;
 
       const prompt = `# AIKM Card: ${name} (AI Knowledge Manager)
 
@@ -821,9 +778,6 @@ TM-POL-001 นโยบายและ SOP ระหว่างฝ่าย
 
 ## SOURCES: แฟ้ม/ข้อมูลที่ใช้
 ${bullets(cleanLines($("sources").value))}
-
-## SPECIALIST LENS: มุมมองผู้เชี่ยวชาญเสริม
-${bullets(groupValues("perspective"))}
 
 ## JD: หน้าที่หลัก
 ${bullets(allJD)}
@@ -845,13 +799,9 @@ ${bullets(groupValues("restricted"))}
 "ข้อมูลนี้อยู่นอกขอบเขต AIKM กรุณาตรวจสอบกับผู้จัดการก่อนใช้งาน"
 
 ## HUMAN CHECKPOINT
-${bullets(groupValues("human"))}${optionalSkill}
+ระดับการตรวจ: ${checkLevel}
 
-## INTERVIEW / AUDIT TEST
-1. ถามจากแฟ้ม: ${$("q1").value.trim() || "-"}
-2. ถามแบบ checklist: ${$("q2").value.trim() || "-"}
-3. คำถามที่ควรตอบว่าไม่รู้: ${$("q3").value.trim() || "-"}
-4. คำถามที่ต้องส่งให้คนตรวจ: ${$("q4").value.trim() || "-"}
+${bullets(groupValues("human"))}${optionalSkill}
 `;
       $("output").value = prompt;
       return prompt;
@@ -863,26 +813,16 @@ ${bullets(groupValues("human"))}${optionalSkill}
       window.__timer = setTimeout(() => status.textContent = "", 2400);
     }
 
-    const sourcePresets = {
-      org: `TM-ORG-001 ตารางผู้รับผิดชอบ\n- ฝ่ายขาย: นำโดยหัวหน้าฝ่ายขาย รับผิดชอบ SO/Invoice\n- ฝ่ายจัดซื้อ: นำโดยหัวหน้าจัดซื้อ รับผิดชอบ PO/GR\n- ฝ่ายบัญชี: นำโดยหัวหน้าบัญชี รับผิดชอบ AP/AR/GL`,
-      pol: `TM-POL-001 นโยบายและ SOP ระหว่างฝ่าย\n- วงเงินอนุมัติ PO < 50,000: หัวหน้าจัดซื้อ\n- วงเงิน 50,001-200,000: ผู้จัดการทั่วไป\n- วงเงิน > 200,000: กรรมการบริษัท\n- กำหนดส่งเอกสารภาษีรายเดือน: วันที่ 10`,
-      nb: `สรุปข้อมูลจาก NB ฝ่ายขาย/จัดซื้อ/บัญชี\n[ฝ่ายขาย] ลูกค้าหลัก 3 ราย: ABC, กรีนฟาร์ม, ดอยคำ\n[ฝ่ายจัดซื้อ] Vendor หลัก 5 ราย อนุมัติแล้ว\n[ฝ่ายบัญชี] รอบปิดบัญชีทุกวันที่ 25 ของเดือน`
-    };
-
-    document.querySelectorAll("[data-preset]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const key = button.dataset.preset;
-        if (sourcePresets[key]) {
-          $("sources").value = sourcePresets[key];
-          buildPrompt();
-          setStatus("เติมตัวอย่างแล้ว");
-        }
-      });
-    });
 
     document.querySelectorAll(".chip").forEach((button) => {
       button.addEventListener("click", () => {
-        button.classList.toggle("selected");
+        const group = button.closest("[data-group]");
+        if (group && group.dataset.single === "true") {
+          group.querySelectorAll(".chip").forEach((c) => c.classList.remove("selected"));
+          button.classList.add("selected");
+        } else {
+          button.classList.toggle("selected");
+        }
         buildPrompt();
       });
     });
@@ -911,16 +851,31 @@ ${bullets(groupValues("human"))}${optionalSkill}
       }
     });
 
+    $("copy-output").addEventListener("click", async () => {
+      const prompt = buildPrompt();
+      try {
+        await navigator.clipboard.writeText(prompt);
+        $("copy-output").textContent = "✓ Copy แล้ว!";
+        setTimeout(() => { $("copy-output").innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Markdown Prompt'; }, 2000);
+        setStatus("Copy แล้ว พร้อมแปะใน Instruction");
+      } catch {
+        $("output").select();
+        document.execCommand("copy");
+        setStatus("Copy แล้ว");
+      }
+    });
+
     $("clear").addEventListener("click", () => {
       if (!confirm("ล้างข้อมูลทั้งหมด?")) return;
       document.querySelectorAll(".persona-card").forEach((c) => c.classList.remove("selected"));
       selectedPersona = null;
       updatePersonaUI();
-      document.querySelectorAll(".chip").forEach((b) => b.classList.remove("selected"));
+      document.querySelectorAll(".chip:not([data-group='checklevel'])").forEach((b) => b.classList.remove("selected"));
+      document.querySelector("[data-group='checklevel'] .chip:nth-child(2)").classList.add("selected");
       document.querySelectorAll("input[type='checkbox']").forEach((c) => c.checked = false);
       document.querySelectorAll("input[type='text']").forEach((i) => i.value = "");
-      document.querySelectorAll("textarea").forEach((t) => t.value = "");
-      $("sources").value = "TM-ORG-001 ตารางผู้รับผิดชอบ\nTM-POL-001 นโยบายและ SOP ระหว่างฝ่าย\nสรุปข้อมูลจาก NB ฝ่ายขาย/จัดซื้อ/บัญชี";
+      $("jd_custom").value = "";
+      $("sources").value = "TM-ORG-001_ตารางผู้รับผิดชอบ.docx\nTM-POL-001_นโยบายและSOP_ระหว่างฝ่าย.docx\nสถานะงาน_ฝ่ายขาย_2569-07.xlsx\nสถานะงาน_ฝ่ายจัดซื้อ_2569-07.xlsx\nสถานะงาน_ฝ่ายบัญชี_2569-07.xlsx";
       buildPrompt();
       setStatus("ล้างฟอร์มแล้ว");
     });

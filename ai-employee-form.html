@@ -391,24 +391,6 @@
             <label class="field" style="margin-top:12px;">แฟ้ม/ข้อมูลที่จะให้เพื่อทำงานในตำแหน่งนี้
               <textarea id="sources" placeholder="เช่น SOP รับเอกสาร, Checklist ภาษีรายเดือน, FAQ ลูกค้าใหม่"></textarea>
             </label>
-            <div class="preset-row">
-              <button class="preset" type="button" data-preset="accounting">ตัวอย่างบัญชี</button>
-              <button class="preset" type="button" data-preset="sales">ตัวอย่างฝ่ายขาย</button>
-              <button class="preset" type="button" data-preset="purchase">ตัวอย่างจัดซื้อ</button>
-            </div>
-            <p class="hint" style="margin-top:16px;"><strong>มุมมองผู้เชี่ยวชาญเสริม</strong> เลือก 0-2 ข้อ ถ้าอยากให้ AI วิเคราะห์ด้วยหมวกเฉพาะทาง</p>
-            <div class="chips" data-group="perspective">
-              <button class="chip" type="button" data-value="Compliance & Regulation: วิเคราะห์ข้อกำหนด มาตรฐาน และความเสี่ยงด้านกฎระเบียบ">Compliance</button>
-              <button class="chip" type="button" data-value="Financial Risk: ประเมินความเสี่ยงด้านเครดิต สภาพคล่อง ปฏิบัติการ และผลกระทบทางการเงิน">Financial Risk</button>
-              <button class="chip" type="button" data-value="Legal Lens: ตีความข้อกฎหมาย สัญญา และประเด็นที่ต้องให้ผู้เชี่ยวชาญตรวจ">Legal</button>
-              <button class="chip" type="button" data-value="IFRS/TFRS Expert: มองผลกระทบต่อมาตรฐานบัญชี การเปิดเผยข้อมูล และการตรวจสอบได้">IFRS/TFRS</button>
-              <button class="chip" type="button" data-value="Process Architect: มองงานเป็น flowchart ขั้นตอน ระบบ และจุดส่งต่อ">Process</button>
-              <button class="chip" type="button" data-value="Document Editor: จัดโครงสร้างภาษา เอกสาร รายงาน และความสอดคล้องของคำศัพท์">Document Editor</button>
-              <button class="chip" type="button" data-value="Project Manager: มองแผนงาน ทรัพยากร timeline ความคืบหน้า และเจ้าของงาน">Project Manager</button>
-              <button class="chip" type="button" data-value="Multilingual Interpreter: แปล สรุป และเทียบความหมายของเอกสารหลายภาษาอย่างระมัดระวัง">Multilingual</button>
-              <button class="chip" type="button" data-value="Financial Communication: เล่าเรื่องข้อมูล ทำให้งานซับซ้อนเข้าใจง่าย เหมาะกับผู้บริหารหรือ presentation">Financial Communication</button>
-              <button class="chip" type="button" data-value="Digital Assets & CBDC: มองความเสี่ยงและข้อกำกับที่เกี่ยวกับสินทรัพย์ดิจิทัล Stablecoin และ CBDC">Digital Assets</button>
-            </div>
           </div>
         </div>
 
@@ -511,40 +493,27 @@
         <div class="card">
           <div class="card-head">
             <h2>6. Human Checkpoint</h2>
-            <p>เรื่องไหน AI ช่วยร่างได้ แต่ต้องให้คนตรวจ</p>
+            <p>เรื่องไหน AI ช่วยร่างได้ แต่ต้องให้คนตรวจ — เลือกด้วยว่าต้องตรวจระดับไหน</p>
           </div>
           <div class="card-body yellow">
+            <p class="hint"><strong>เรื่องที่ต้องตรวจ</strong></p>
             <div class="chips" data-group="human">
               <button class="chip" type="button" data-value="ก่อนส่งข้อความถึงลูกค้า">ก่อนส่งลูกค้า</button>
               <button class="chip" type="button" data-value="ก่อนใช้ตัวเลขภาษีหรือบัญชี">ก่อนใช้ตัวเลขภาษี</button>
               <button class="chip" type="button" data-value="ก่อนอนุมัติราคา ส่วนลด หรือวงเงิน">ก่อนอนุมัติวงเงิน</button>
               <button class="chip" type="button" data-value="ก่อนตอบเรื่องกฎหมาย ภาษี หรือสัญญา">ก่อนตอบเรื่องเสี่ยง</button>
+              <button class="chip" type="button" data-value="ก่อนเผยแพร่เนื้อหาสู่สาธารณะ">ก่อนเผยแพร่</button>
+              <button class="chip" type="button" data-value="ก่อนส่งต่อข้ามฝ่าย">ก่อนส่งข้ามฝ่าย</button>
+            </div>
+            <p class="hint" style="margin-top:16px;"><strong>ระดับการตรวจ</strong> เลือก 1 ระดับ</p>
+            <div class="chips" data-group="checklevel" data-single="true">
+              <button class="chip" type="button" data-value="🟢 ระดับเบา: ดูผ่านๆ แก้ถ้าพบผิดชัดเจน">🟢 เบา (ดูผ่านๆ)</button>
+              <button class="chip selected" type="button" data-value="🟡 ระดับกลาง: อ่านละเอียดทุกบรรทัด ยืนยันก่อนส่ง">🟡 กลาง (อ่านละเอียด)</button>
+              <button class="chip" type="button" data-value="🔴 ระดับเข้ม: ผู้เชี่ยวชาญต้องตรวจก่อนนำไปใช้จริง">🔴 เข้ม (ผู้เชี่ยวชาญตรวจ)</button>
             </div>
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-head">
-            <h2>7. คำถามสัมภาษณ์ AI</h2>
-            <p>ใช้ถามหลังตั้งค่า AI แล้ว เพื่อทดสอบว่าพร้อมทำงานไหม</p>
-          </div>
-          <div class="card-body">
-            <div class="grid-2">
-              <label class="field">ถามจากแฟ้ม
-                <input id="q1" type="text" placeholder="เช่น เอกสารจากฝ่ายขายต้องมีอะไรบ้าง">
-              </label>
-              <label class="field">ถามแบบ checklist
-                <input id="q2" type="text" placeholder="เช่น ทำ checklist เอกสารที่ยังขาด">
-              </label>
-              <label class="field">คำถามที่ควรตอบว่าไม่รู้
-                <input id="q3" type="text" placeholder="เช่น เงินเดือนพนักงานแต่ละคนเท่าไร">
-              </label>
-              <label class="field">คำถามที่ต้องส่งให้คนตรวจ
-                <input id="q4" type="text" placeholder="เช่น เอกสารชุดนี้ยื่นภาษีได้เลยไหม">
-              </label>
-            </div>
-          </div>
-        </div>
       </section>
 
       <aside class="stack sticky">
@@ -570,6 +539,10 @@
             <p>คัดลอกไปแปะใน Instruction ของเครื่องมือ AI</p>
           </div>
           <div class="card-body">
+            <button id="copy-output" type="button" style="width:100%;margin-bottom:10px;min-height:44px;border:0;border-radius:8px;padding:10px 14px;background:#2b0877;color:#fff;font:900 16px 'Prompt',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;" onmouseover="this.style.background='#4a0fa8'" onmouseout="this.style.background='#2b0877'">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Markdown Prompt
+            </button>
             <textarea id="output" class="output" readonly></textarea>
           </div>
         </div>
@@ -586,49 +559,37 @@
         name: "น้องมายด์",
         role: "AI ฝ่ายบัญชี",
         sources: "SOP การรับเอกสารจากฝ่ายขาย\nChecklist เอกสารภาษีรายเดือน\nFAQ ที่ฝ่ายขายถามบัญชีบ่อย",
-        perspective: ["IFRS/TFRS Expert: มองผลกระทบต่อมาตรฐานบัญชี การเปิดเผยข้อมูล และการตรวจสอบได้", "Compliance & Regulation: วิเคราะห์ข้อกำหนด มาตรฐาน และความเสี่ยงด้านกฎระเบียบ"],
         jd: ["ตอบคำถามจากข้อมูลในแฟ้มฝ่าย", "สร้าง checklist จาก SOP", "ตรวจความครบถ้วนของเอกสาร"],
         soul: ["สุภาพและมืออาชีพ", "รอบคอบ ไม่รีบสรุป", "ไม่เดา ถ้าไม่มีข้อมูลให้บอกว่าไม่พบ", "ตอบเป็นระบบ ใช้ bullet หรือ checklist", "หัวคำนวณ ตรวจตัวเลขและตรรกะอย่างเป็นระบบ", "โปร่งใส ตรวจสอบได้ และแยกข้อเท็จจริงออกจากความเห็น"],
         output: ["Checklist", "ตาราง", "ขั้นตอนทีละข้อ", "สรุปบรรยายให้อ่านเข้าใจง่าย", "สรุปแบบ Problem-Solution: ปัญหา → สาเหตุ → วิธีแก้"],
         access: ["ขั้นตอนงานในฝ่ายตัวเอง", "Checklist และ template ที่ใช้ประจำ", "ผู้รับผิดชอบและช่องทางส่งต่อ"],
         restricted: ["รหัสผ่าน API key หรือข้อมูล login", "ข้อมูลส่วนบุคคลละเอียดอ่อน", "ตัวเลขภาษีสุดท้ายก่อนผู้เชี่ยวชาญตรวจ", "ยอดขายรายคนหรือ performance ส่วนบุคคล"],
         human: ["ก่อนส่งข้อความถึงลูกค้า", "ก่อนใช้ตัวเลขภาษีหรือบัญชี", "ก่อนตอบเรื่องกฎหมาย ภาษี หรือสัญญา"],
-        q1: "เอกสารจากฝ่ายขายต้องมีอะไรบ้าง",
-        q2: "ช่วยทำ checklist เอกสารที่ยังขาด",
-        q3: "เงินเดือนพนักงานแต่ละคนเท่าไร",
-        q4: "เอกสารชุดนี้ยื่นภาษีได้เลยไหม"
+        checklevel: ["🔴 ระดับเข้ม: ผู้เชี่ยวชาญต้องตรวจก่อนนำไปใช้จริง"]
       },
       sales: {
         name: "น้องเซลล์",
         role: "AI ฝ่ายขาย",
         sources: "ราคาและแพ็กเกจบริการ\nFAQ ลูกค้าใหม่\nTemplate LINE ตอบลูกค้า\nเงื่อนไขการขายที่อนุมัติแล้ว",
-        perspective: ["Financial Communication: เล่าเรื่องข้อมูล ทำให้งานซับซ้อนเข้าใจง่าย เหมาะกับผู้บริหารหรือ presentation"],
         jd: ["ตอบคำถามจากข้อมูลในแฟ้มฝ่าย", "ร่างอีเมลหรือ LINE ตามนโยบาย", "ค้นเงื่อนไข ราคา หรือ policy"],
         soul: ["สุภาพและมืออาชีพ", "กระชับ ตรงประเด็น", "ถามกลับเมื่อข้อมูลไม่ครบ", "ไม่เดา ถ้าไม่มีข้อมูลให้บอกว่าไม่พบ", "ขี้สงสัย ชอบถามต่อเพื่อหาสาเหตุและบริบท"],
         output: ["ร่าง LINE", "ร่างอีเมล", "FAQ", "อธิบายแบบเด็ก 10 ขวบเข้าใจ", "กระชับ ตรงประเด็น ไม่เกิน 200 คำ"],
         access: ["FAQ และคำตอบมาตรฐาน", "Checklist และ template ที่ใช้ประจำ", "ผู้รับผิดชอบและช่องทางส่งต่อ"],
         restricted: ["เงินเดือนหรือข้อมูล HR ที่ไม่เกี่ยวข้อง", "สัญญา ราคา หรือส่วนลดที่ยังไม่อนุมัติ", "ข้อมูลข้ามฝ่ายที่ไม่เกี่ยวข้องกับตำแหน่ง", "ต้นทุนสินค้า margin หรือข้อมูลกำไรที่ไม่ควรเปิดเผย"],
         human: ["ก่อนส่งข้อความถึงลูกค้า", "ก่อนอนุมัติราคา ส่วนลด หรือวงเงิน"],
-        q1: "ลูกค้าใหม่ต้องส่งข้อมูลอะไรให้ฝ่ายขาย",
-        q2: "ทำ checklist ก่อนเสนอราคา",
-        q3: "เงินเดือนทีมขายแต่ละคนเท่าไร",
-        q4: "อนุมัติส่วนลด 20% ได้เลยไหม"
+        checklevel: ["🟡 ระดับกลาง: อ่านละเอียดทุกบรรทัด ยืนยันก่อนส่ง"]
       },
       purchase: {
         name: "น้องจัดซื้อ",
         role: "AI ฝ่ายจัดซื้อ",
         sources: "รายชื่อ Vendor ที่อนุมัติแล้ว\nPolicy วงเงินอนุมัติ\nSOP เปิดใบสั่งซื้อ\nTemplate ขออนุมัติซื้อ",
-        perspective: ["Process Architect: มองงานเป็น flowchart ขั้นตอน ระบบ และจุดส่งต่อ", "Financial Risk: ประเมินความเสี่ยงด้านเครดิต สภาพคล่อง ปฏิบัติการ และผลกระทบทางการเงิน"],
         jd: ["ตอบคำถามจากข้อมูลในแฟ้มฝ่าย", "สรุปขั้นตอนการทำงาน", "ค้นเงื่อนไข ราคา หรือ policy"],
         soul: ["รอบคอบ ไม่รีบสรุป", "ไม่เดา ถ้าไม่มีข้อมูลให้บอกว่าไม่พบ", "ตอบเป็นระบบ ใช้ bullet หรือ checklist", "หัวคำนวณ ตรวจตัวเลขและตรรกะอย่างเป็นระบบ", "คิดเป็น flowchart เห็นลำดับงาน จุดตัดสินใจ และจุดส่งต่อ"],
         output: ["Checklist", "ตาราง", "ขั้นตอนทีละข้อ", "สรุปบรรยายให้อ่านเข้าใจง่าย", "สรุปแบบ Timeline เรียงตามเวลา วันที่ และเหตุการณ์สำคัญ"],
         access: ["ขั้นตอนงานในฝ่ายตัวเอง", "Checklist และ template ที่ใช้ประจำ", "ผู้รับผิดชอบและช่องทางส่งต่อ"],
         restricted: ["ข้อมูลข้ามฝ่ายที่ไม่เกี่ยวข้องกับตำแหน่ง", "สัญญา ราคา หรือส่วนลดที่ยังไม่อนุมัติ", "ข้อมูลส่วนบุคคลละเอียดอ่อน", "ยอดขายรายคนหรือ performance ส่วนบุคคล", "ต้นทุนสินค้า margin หรือข้อมูลกำไรที่ไม่ควรเปิดเผย"],
         human: ["ก่อนอนุมัติราคา ส่วนลด หรือวงเงิน", "ก่อนตอบเรื่องกฎหมาย ภาษี หรือสัญญา"],
-        q1: "ใบสั่งซื้อเกิน 50,000 บาทต้องให้ใครเซ็น",
-        q2: "ทำ checklist ก่อนเปิด PO",
-        q3: "margin ของลูกค้า ABC คือเท่าไร",
-        q4: "อนุมัติ Vendor รายใหม่นี้ได้เลยไหม"
+        checklevel: ["🟡 ระดับกลาง: อ่านละเอียดทุกบรรทัด ยืนยันก่อนส่ง"]
       }
     };
 
@@ -655,13 +616,11 @@
       const role = $("role").value.trim() || "[ตำแหน่ง]";
       const sourceLines = cleanLines($("sources").value);
       const allJD = [...groupValues("jd"), ...cleanLines($("jd_custom").value)];
+      const checkLevel = groupValues("checklevel")[0] || "🟡 ระดับกลาง: อ่านละเอียดทุกบรรทัด ยืนยันก่อนส่ง";
       const prompt = `# AI Employee Card: ${name} (${role})
 
 ## IDENTITY
 คุณคือ ${name} ตำแหน่ง ${role}
-
-## SPECIALIST LENS: มุมมองผู้เชี่ยวชาญเสริม
-${bullets(groupValues("perspective"))}
 
 ## JD: หน้าที่หลัก
 ${bullets(allJD)}
@@ -689,15 +648,10 @@ ${bullets(groupValues("restricted"))}
 "ข้อมูลนี้อยู่นอกขอบเขตของตำแหน่งนี้ กรุณาตรวจสอบกับผู้รับผิดชอบก่อนใช้งาน"
 
 ## HUMAN CHECKPOINT
+ระดับการตรวจ: ${checkLevel}
+
 เรื่องต่อไปนี้ต้องให้มนุษย์ตรวจหรืออนุมัติก่อนใช้จริง:
 ${bullets(groupValues("human"))}
-
-## INTERVIEW / AUDIT TEST
-ใช้คำถามเหล่านี้ทดสอบหลังตั้งค่า AI:
-1. คำถามจากแฟ้ม: ${$("q1").value.trim() || "-"}
-2. คำถามแบบ checklist: ${$("q2").value.trim() || "-"}
-3. คำถามที่ควรตอบว่าไม่รู้: ${$("q3").value.trim() || "-"}
-4. คำถามที่ต้องส่งให้คนตรวจ: ${$("q4").value.trim() || "-"}
 `;
       $("output").value = prompt;
       return prompt;
@@ -712,10 +666,10 @@ ${bullets(groupValues("human"))}
     function applyPreset(name) {
       const preset = presets[name];
       if (!preset) return;
-      ["name", "role", "sources", "q1", "q2", "q3", "q4"].forEach((id) => {
+      ["name", "role", "sources"].forEach((id) => {
         $(id).value = preset[id] || "";
       });
-      ["perspective", "jd", "soul", "output", "access", "restricted", "human"].forEach((group) => {
+      ["jd", "soul", "output", "access", "restricted", "human", "checklevel"].forEach((group) => {
         setGroup(group, preset[group] || []);
       });
       buildPrompt();
@@ -724,7 +678,13 @@ ${bullets(groupValues("human"))}
 
     document.querySelectorAll(".chip").forEach((button) => {
       button.addEventListener("click", () => {
-        button.classList.toggle("selected");
+        const group = button.closest("[data-group]");
+        if (group && group.dataset.single === "true") {
+          group.querySelectorAll(".chip").forEach((c) => c.classList.remove("selected"));
+          button.classList.add("selected");
+        } else {
+          button.classList.toggle("selected");
+        }
         buildPrompt();
       });
     });
@@ -749,6 +709,20 @@ ${bullets(groupValues("human"))}
         await navigator.clipboard.writeText(prompt);
         setStatus("Copy แล้ว พร้อมแปะใน Instruction");
       } catch (error) {
+        $("output").select();
+        document.execCommand("copy");
+        setStatus("Copy แล้ว");
+      }
+    });
+
+    $("copy-output").addEventListener("click", async () => {
+      const prompt = buildPrompt();
+      try {
+        await navigator.clipboard.writeText(prompt);
+        $("copy-output").textContent = "✓ Copy แล้ว!";
+        setTimeout(() => { $("copy-output").innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Markdown Prompt'; }, 2000);
+        setStatus("Copy แล้ว พร้อมแปะใน Instruction");
+      } catch {
         $("output").select();
         document.execCommand("copy");
         setStatus("Copy แล้ว");
