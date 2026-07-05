@@ -465,6 +465,19 @@ TM-POL-001_นโยบายและSOP_ระหว่างฝ่าย.docx
 สถานะงาน_ฝ่ายจัดซื้อ_2569-07.xlsx
 สถานะงาน_ฝ่ายบัญชี_2569-07.xlsx</textarea>
             </label>
+            <p class="hint" style="margin-top:16px;"><strong>มุมมองผู้เชี่ยวชาญเสริม</strong> เลือก 0-2 ข้อ</p>
+            <div class="chips" data-group="perspective">
+              <button class="chip" type="button" data-value="Compliance & Regulation: วิเคราะห์ข้อกำหนด มาตรฐาน และความเสี่ยงด้านกฎระเบียบ">Compliance</button>
+              <button class="chip" type="button" data-value="Financial Risk: ประเมินความเสี่ยงด้านเครดิต สภาพคล่อง ปฏิบัติการ และผลกระทบทางการเงิน">Financial Risk</button>
+              <button class="chip" type="button" data-value="Legal Lens: ตีความข้อกฎหมาย สัญญา และประเด็นที่ต้องให้ผู้เชี่ยวชาญตรวจ">Legal</button>
+              <button class="chip" type="button" data-value="IFRS/TFRS Expert: มองผลกระทบต่อมาตรฐานบัญชี การเปิดเผยข้อมูล และการตรวจสอบได้">IFRS/TFRS</button>
+              <button class="chip" type="button" data-value="Process Architect: มองงานเป็น flowchart ขั้นตอน ระบบ และจุดส่งต่อ">Process</button>
+              <button class="chip" type="button" data-value="Document Editor: จัดโครงสร้างภาษา เอกสาร รายงาน และความสอดคล้องของคำศัพท์">Document Editor</button>
+              <button class="chip" type="button" data-value="Project Manager: มองแผนงาน ทรัพยากร timeline ความคืบหน้า และเจ้าของงาน">Project Manager</button>
+              <button class="chip" type="button" data-value="Multilingual Interpreter: แปล สรุป และเทียบความหมายของเอกสารหลายภาษาอย่างระมัดระวัง">Multilingual</button>
+              <button class="chip" type="button" data-value="Financial Communication: เล่าเรื่องข้อมูล ทำให้งานซับซ้อนเข้าใจง่าย เหมาะกับผู้บริหารหรือ presentation">Financial Communication</button>
+              <button class="chip" type="button" data-value="Digital Assets & CBDC: มองความเสี่ยงและข้อกำกับที่เกี่ยวกับสินทรัพย์ดิจิทัล Stablecoin และ CBDC">Digital Assets</button>
+            </div>
           </div>
         </div>
 
@@ -778,6 +791,9 @@ TM-POL-001_นโยบายและSOP_ระหว่างฝ่าย.docx
 
 ## SOURCES: แฟ้ม/ข้อมูลที่ใช้
 ${bullets(cleanLines($("sources").value))}
+
+## SPECIALIST LENS: มุมมองผู้เชี่ยวชาญเสริม
+${bullets(groupValues("perspective"))}
 
 ## JD: หน้าที่หลัก
 ${bullets(allJD)}
