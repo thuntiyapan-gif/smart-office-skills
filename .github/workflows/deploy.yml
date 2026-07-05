@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Deploy to Netlify
-        run: npx netlify-cli deploy --prod --dir=.
+        run: npx netlify-cli@17.38.1 deploy --prod --dir=.
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: 28efa1dd-a42e-4cb1-ad56-5f2bbd026b20
